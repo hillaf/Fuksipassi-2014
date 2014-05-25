@@ -1,0 +1,28 @@
+INSERT INTO tapahtuma (tapahtumatunnus, nimi, paikka, pvm, aika, linkki, pisteet, kuvaus) VALUES (
+	1,
+	'Fuksiaiset',
+	'Alina-sali',
+	'2014-10-01',
+	'18:00',
+	'http://www.tko-aly.fi',
+	1,
+	'Fuksiaiset! Jee!'
+);
+
+INSERT INTO fuksi (fuksitunnus, nimi, ircnick, email) VALUES (
+	2,
+	'Fuksi Fuksinen',
+	'fuksi_',
+	'fuksi.fuksinen@cs.helsinki.fi'
+);
+
+
+INSERT INTO tutor (tutortunnus, nimi, ircnick, email) VALUES (
+	3,
+	'Tutor Tutorinen',
+	'futor_',
+	'tutor.tutorinen@cs.helsinki.fi'
+);
+
+
+

@@ -27,35 +27,27 @@
             </nav>
 
             <h1>Tapahtumat</h1>
-            <div class="container">
 
-                <table class="table table-hover table-responsive">
-                    <thead>
-                        <tr>
-                            <th>Tapahtuma</th>
-                            <th>Päivä</th>
-                            <th>Aika</th>
-                            <th>Paikka</th>
-                            <th>Kuvaus</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <div id="parent">
-                        <tr>
-                            <td>Fuksibileet</td>
-                            <td>1.9.2014</td>
-                            <td>18:00</td>
-                            <td>Klush</td>
-                            <td>Parasta!1</td>
-                        </tr>
-                    </div>
-                    <div id="kid">
-                        <tr>
-                            <td>
-                                Tapahtumainfo.
-                            </td>
-                        </tr>
-                    </div>
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <th>Tapahtuma</th>
+                        <th>Päivä</th>
+                        <th>Aika</th>
+                        <th>Paikka</th>
+                        <th>Kuvaus</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr onclick="document.location = 'tapahtuma.php';">
+                        <td>Fuksibileet</td>
+                        <td>1.9.2014</td>
+                        <td>18:00</td>
+                        <td>Klush</td>
+                        <td>Parasta!1</td>
+                    </tr>
+                    
                     <tr>
 
                         <td>Fuksisuunnistus</td>
@@ -65,11 +57,9 @@
                         <td>Vielä parempaa!</td>
                     </tr>
 
+                </tbody>
+            </table>
 
-                    </tbody>
-                </table>
-
-            </div>
         </div>
 
 

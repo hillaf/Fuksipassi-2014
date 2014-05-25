@@ -1,0 +1,32 @@
+CREATE TABLE tapahtuma (
+    tapahtumatunnus     int PRIMARY KEY,
+    nimi       		varchar(50) NOT NULL,
+    paikka      	varchar(50),
+    pvm   		date,
+    aika        	time,
+    linkki      	varchar(50),
+    pisteet 		int,
+    kuvaus 		varchar(500)
+);
+
+
+CREATE TABLE fuksi (
+    fuksitunnus     	int PRIMARY KEY,
+    nimi       		varchar(50) NOT NULL,
+    ircnick      	varchar(50),
+    email   		varchar(50)
+);
+
+
+CREATE TABLE tutor (
+    tutortunnus     	int PRIMARY KEY,
+    nimi       		varchar(50) NOT NULL,
+    ircnick      	varchar(50),
+    email   		varchar(50)
+);
+
+
+
+CREATE TABLE osallistuminen (
+    otunnus 		int PRIMARY KEY
+);
