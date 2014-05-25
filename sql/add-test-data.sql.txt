@@ -20,9 +20,22 @@ INSERT INTO fuksi (fuksitunnus, nimi, ircnick, email) VALUES (
 INSERT INTO tutor (tutortunnus, nimi, ircnick, email) VALUES (
 	3,
 	'Tutor Tutorinen',
-	'futor_',
+	'tutor_',
 	'tutor.tutorinen@cs.helsinki.fi'
 );
 
+INSERT INTO tutor (tutortunnus, nimi, ircnick, email) VALUES (
+	5,
+	'Tutorina Tutorinen',
+	'tutorina_',
+	'tutorina.tutorinen@cs.helsinki.fi'
+);
+
+INSERT INTO tutor (tutortunnus, nimi, ircnick, email) VALUES (
+	6,
+	'Turppu Tutorinen',
+	'turppu_',
+	'turppu.tutorinen@cs.helsinki.fi'
+);
 
 
