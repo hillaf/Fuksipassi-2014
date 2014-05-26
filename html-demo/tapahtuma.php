@@ -19,7 +19,7 @@
         </div>
         <div class="container">
 
-        <h1>Fuksiaiset</h1>
+        <h1>Fuksibileet</h1>
         <p> Tapahtuman tietoja. </p>
         </div>
     </body>

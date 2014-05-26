@@ -38,4 +38,12 @@ INSERT INTO tutor (tutortunnus, nimi, ircnick, email) VALUES (
 	'turppu.tutorinen@cs.helsinki.fi'
 );
 
+INSERT INTO osallistuminen (otunnus, tapahtumatunnus, fuksitunnus, pisteet, tutortunnus) VALUES (
+	7,
+	1,
+	2,
+	1,
+	6
+);
+
 

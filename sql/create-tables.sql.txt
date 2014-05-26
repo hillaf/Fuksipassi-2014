@@ -28,5 +28,9 @@ CREATE TABLE tutor (
 
 
 CREATE TABLE osallistuminen (
-    otunnus 		int PRIMARY KEY
+    otunnus 		int PRIMARY KEY,
+    tapahtumatunnus 	int references tapahtuma(tapahtumatunnus),
+    fuksitunnus 	int references fuksi(fuksitunnus),
+    pisteet 		int,
+    tutortunnus 	int references tutor(tutortunnus)
 );

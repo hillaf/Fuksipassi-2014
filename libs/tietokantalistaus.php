@@ -1,16 +1,36 @@
 <?php
 
+require 'Kayttaja.php';
 require 'tietokantayhteys.php';
-$kysely = getTietokantayhteys()->prepare("SELECT nimi from tutor");
+
+
+
+$sql = "SELECT id,tunnus, password FROM users";
+$kysely = getTietokantayhteys()->prepare($sql);
 $kysely->execute();
 
+echo "TUNNUKSET";
+echo "<br>";
 
-$rivit = $kysely->fetchAll(PDO::FETCH_OBJ);
-echo $rivit[0]->nimi;
-echo $rivit[1]->nimi;
-echo $rivit[2]->nimi;
+$tulokset = array();
+
+foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
+    $kayttaja = new Kayttaja();
+    $kayttaja->setId($tulos->id);
+    $kayttaja->setTunnus($tulos->tunnus);
+    $kayttaja->setSalasana($tulos->salasana);
+
+    //$array[] = $muuttuja; lisää muuttujan arrayn perään. 
+    //Se vastaa melko suoraan ArrayList:in add-metodia.
+    $tulokset[] = $kayttaja;
+}
+
+foreach ($tulokset as $value) {
+    echo "<br>";
+    echo $value->getTunnus();
+}
 
 
-echo '          < ----- Tietokantayhteys toimii! ConnectionTest ei. Debugaan huomenna! githubista löytyy sql-kansio, josta näkee mitä kaikkea kannasta löytyy tällä hetkellä';
+echo "<br>";
 
 
