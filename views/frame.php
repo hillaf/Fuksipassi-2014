@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
     <head>
         <meta charset="UTF-8">
-        <link href="../css/bootstrap.css" rel="stylesheet">
-        <link href="../css/bootstrap-theme.css" rel="stylesheet">
-        <link href="../css/main.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap-theme.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet">
         <title>Fuksipassi 2014</title>
     </head>
     <body>
@@ -17,10 +17,12 @@
                 <li><a href="#">Kirjaudu ulos</a></li>
             </ul>
         </div>
-        <div class="container">
-
-        <h1>Fuksibileet</h1>
-        <p> Tapahtuman tietoja. </p>
-        </div>
-    </body>
+  <?php 
+    /* HTML-rungon keskellä on sivun sisältö, 
+     * joka haetaan sopivasta näkymätiedostosta.
+     * Oikean näkymän tiedostonimi on tallennettu muuttujaan $sivu.
+     */
+  
+    require 'views/'.$sivu.'.php'; 
+  ?>
 </html>
