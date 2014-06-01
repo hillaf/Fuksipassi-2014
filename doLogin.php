@@ -15,11 +15,10 @@
   
   if ($kirjautuja != null) {
     /* Jos tunnus on oikea, ohjataan käyttäjä sopivalla HTTP-otsakkeella kissalistaan. */
-    
-      session_start();
-      $_SESSION['kirjautunut'] = $kirjautuja;
+   
+      $_SESSION['kirjautunut'] = $kirjautuja->getTunnus();
       
-      header('Location: my.php');
+      header('Location: index.php');
   } else {
     /* Väärän tunnuksen syöttänyt saa eteensä kirjautumislomakkeen. */
     naytaNakyma("login", array(

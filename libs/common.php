@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 function naytaNakyma($sivu, $data = array()) {
     $data = (object) $data;
@@ -7,12 +8,11 @@ function naytaNakyma($sivu, $data = array()) {
     exit();
 }
 
-function onkoKirjautunut() {
-    session_start();
+function onkoKirjautunut($kohde) {
     if (isset($_SESSION['kirjautunut'])) {
-        return true;
+        naytaNakyma($kohde);
     } else {
-        return false;
+        naytaNakyma('login');
     }
 }
 

@@ -13,7 +13,7 @@
                 <li><a href="my.php">Omat tiedot</a></li>
                 <li><a href="events.php">Tapahtumat</a></li>
                 <li><a href="fuksit.php">Fuksit</a></li>
-                <li><a href="#">Kirjaudu ulos</a></li>
+                <li><a href="logout.php">Kirjaudu ulos</a></li>
             </ul>
         </div>
   <?php 
