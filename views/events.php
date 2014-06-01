@@ -1,8 +1,8 @@
-<!DOCTYPE html>
 <html>
     <body>
         <div class ="container">
             <h1>Tapahtumat</h1>
+            
 
             <table class="table table-hover table-responsive">
                 <thead>

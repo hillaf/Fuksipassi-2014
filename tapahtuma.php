@@ -1,3 +1,3 @@
 <?php
-  require_once 'libs/common.php';
-  naytaNakyma('tapahtuma');
+require_once 'libs/common.php';
+naytaNakyma('tapahtuma');

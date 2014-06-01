@@ -1,11 +1,12 @@
-<!DOCTYPE html>
 <html>
 
     <div class="container">
 
         <h1>Kirjaudu sisään</h1>
 
-        <form action="login.php" method="POST">
+      
+
+        <form action="doLogin.php" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" class="form-control" name="username" id="username" placeholder="Username">

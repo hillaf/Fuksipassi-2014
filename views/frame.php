@@ -1,4 +1,3 @@
-<!DOCTYPE HTML>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -22,7 +21,7 @@
      * joka haetaan sopivasta näkymätiedostosta.
      * Oikean näkymän tiedostonimi on tallennettu muuttujaan $sivu.
      */
-  
+    
     require 'views/'.$sivu.'.php'; 
   ?>
 </html>

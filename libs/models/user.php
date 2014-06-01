@@ -1,4 +1,7 @@
 <?php
+
+require_once 'libs/tietokantayhteys.php';
+
 class user {
   
   private $id;
@@ -6,9 +9,9 @@ class user {
   private $salasana;
 
   public function __construct($id, $tunnus, $salasana) {
-    $this->id = $id;
-    $this->tunnus = $tunnus;
-    $this->salasana = $salasana;
+   $this->id = $id;
+   $this->tunnus = $tunnus;
+   $this->salasana = $salasana;
   }
 
   public function getId(){
@@ -35,4 +38,19 @@ class user {
       $this->salasana = $salasana;
   }
   
+  public static function etsiKayttajaTunnuksilla($kayttaja, $salasana) {
+    $sql = "SELECT id,tunnus, password from users where tunnus = ? AND password = ? LIMIT 1";
+    $kysely = getTietokantayhteys()->prepare($sql);
+    $kysely->execute(array($kayttaja, $salasana));
+
+    $tulos = $kysely->fetchObject();
+    if ($tulos == null) {
+      return null;
+    } else {
+      $kayttaja = new user($tulos->id, $tulos->tunnus, $tulos->password); 
+
+
+      return $kayttaja;
+    }
+  }
 }
