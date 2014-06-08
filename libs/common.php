@@ -8,11 +8,12 @@ function naytaNakyma($sivu, $data = array()) {
     exit();
 }
 
-function onkoKirjautunut($kohde) {
+function onkoKirjautunut($kohde, $data = array()) {
+    
     if (isset($_SESSION['kirjautunut'])) {
-        naytaNakyma($kohde);
+        naytaNakyma($kohde, $data);
     } else {
-        naytaNakyma('login');
+        naytaNakyma('login', $data);
     }
 }
 

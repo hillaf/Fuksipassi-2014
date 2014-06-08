@@ -14,6 +14,8 @@
                     <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
                 </div>
                 <button type="submit" class="btn btn-default">Tallenna</button>
+            </form>
+        
         </div>
     </body>
 </html>

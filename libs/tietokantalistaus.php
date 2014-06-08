@@ -31,6 +31,3 @@ foreach ($tulokset as $value) {
 }
 
 
-echo "<br>";
-
-
