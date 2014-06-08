@@ -4,6 +4,13 @@
 
     <div class="container">
 
+        <br>
+        <div class="ihansama">
+        <?php if (!empty($data->virhe)): ?>
+            <div class="alert alert-danger"><?php echo $data->virhe; ?></div>
+        <?php endif; ?>
+        </div>
+            
         <h1>Fuksit</h1>
 
 
@@ -34,26 +41,26 @@
         <br>
         <br>
         <div class="lisays">
-        <h4>Lisää fuksi</h4>
-        <form role="form" action="fuksilisays.php" method="POST">
-            <div class="form-group">
-                <label for="fuksitunnus">Fuksi-id</label>
-                <input type="text" class="form-control" name="fuksitunnus" id="fuksitunnus" placeholder="Joku uniikki numerosarja">
-            </div>
-            <div class="form-group">
-                <label for="nimi">Nimi</label>
-                <input type="text" class="form-control" name="nimi" id="nimi" placeholder="Nimi">
-            </div>
-            <div class="form-group">
-                <label for="irc">Ircnick</label>
-                <input type="text" class="form-control" name="ircnick" id="irc" placeholder="Ircnick">
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="Email">
-            </div>
-            <button type="submit" class="btn btn-default">Lisää</button>
-        </form>
+            <h4>Lisää fuksi</h4>
+            <form role="form" action="fuksilisays.php" method="POST">
+                <div class="form-group">
+                    <label for="fuksitunnus">Fuksi-id</label>
+                    <input type="text" class="form-control" name="fuksitunnus" id="fuksitunnus" placeholder="Joku uniikki numerosarja">
+                </div>
+                <div class="form-group">
+                    <label for="nimi">Nimi</label>
+                    <input type="text" class="form-control" name="nimi" id="nimi" placeholder="Nimi">
+                </div>
+                <div class="form-group">
+                    <label for="irc">Ircnick</label>
+                    <input type="text" class="form-control" name="ircnick" id="irc" placeholder="Ircnick">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email">
+                </div>
+                <button type="submit" class="btn btn-default">Lisää</button>
+            </form>
 
         </div>
     </div>
