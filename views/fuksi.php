@@ -35,15 +35,14 @@
 
         <br>
 
-        <div class="btn-group" id="poisto">
+       
             <div class="form-group">
                 <form class="form-group" role="form" method="POST" action="fuksinpoisto.php">
                     <input type="hidden" name="id" value="<?php echo $data->naytettavaFuksi->getId(); ?>">
                     <button type="submit" class="btn btn-default">Poista fuksi</button>
                 </form>
             </div>
-
-        </div>
+        
 
 
     </div>

@@ -19,7 +19,7 @@ if ($uusifuksi->onkoKelvollinen()) {
     $virheet = $uusifuksi->getVirheet();
     $fuksit = fuksi::etsiKaikkiFuksit();
 
-    naytaNakyma("fuksit", array(
+    naytaNakyma("fuksilisaysform", array(
         'virheet' => $virheet,
         'fuksit' => $fuksit,
         'uusifuksiId' => $uusifuksi->getId(),

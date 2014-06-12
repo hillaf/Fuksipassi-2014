@@ -70,7 +70,7 @@ class event {
         $this->pvm = $pvm;
     }
 
-        public function setAika($aika) {
+    public function setAika($aika) {
         $this->aika = $aika;
     }
 
@@ -81,8 +81,26 @@ class event {
     public function setPisteet($pisteet) {
         $this->pisteet = $pisteet;
     }
-    
-    public function setKuvaus($kuvaus){
+
+    public function setKuvaus($kuvaus) {
         $this->kuvaus = $kuvaus;
     }
+
+    public static function etsiKaikkiTapahtumat() {
+
+        $sql = "SELECT * FROM tapahtuma";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute();
+
+        $tulokset = array();
+
+        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
+            $event = new event($tulos->tapahtumatunus, $tulos->nimi, $tulos->paikka, $tulos->pvm, $tulos->aika, $tulos->linkki, $tulos->pisteet, $tulos->kuvaus);
+
+            $tulokset[] = $event;
+        }
+
+        return $tulokset;
+    }
+
 }

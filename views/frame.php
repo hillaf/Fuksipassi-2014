@@ -16,13 +16,17 @@
                 <li><a href="logout.php">Kirjaudu ulos</a></li>
             </ul>
         </div>
-        <?php
-        /* HTML-rungon keskellä on sivun sisältö, 
-         * joka haetaan sopivasta näkymätiedostosta.
-         * Oikean näkymän tiedostonimi on tallennettu muuttujaan $sivu.
-         */
-        
-        require 'views/' . $sivu . '.php';
-        ?>
-    
+        <div class="container">
+            <?php
+            /* HTML-rungon keskellä on sivun sisältö, 
+             * joka haetaan sopivasta näkymätiedostosta.
+             * Oikean näkymän tiedostonimi on tallennettu muuttujaan $sivu.
+             */
+
+            require 'views/' . $sivu . '.php';
+            ?>
+
+        </div>
+
+
 </html>
