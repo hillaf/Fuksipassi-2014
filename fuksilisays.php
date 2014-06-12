@@ -14,11 +14,17 @@ if ($uusifuksi->onkoKelvollinen()) {
     //Asetetaan istuntoon ilmoitus siitä, että fuksi on lisätty.
     $_SESSION['ilmoitus'] = "Uusi fuksi lisätty onnistuneesti.";
 } else {
+    
+    unset($_SESSION['ilmoitus']);
     $virheet = $uusifuksi->getVirheet();
     $fuksit = fuksi::etsiKaikkiFuksit();
 
     naytaNakyma("fuksit", array(
-        'virhe' => "Lisäys epäonnistui. Täytithän kaikki kentät?",
-        'fuksit' => $fuksit
+        'virheet' => $virheet,
+        'fuksit' => $fuksit,
+        'uusifuksiId' => $uusifuksi->getId(),
+        'uusifuksiNimi' => $uusifuksi->getNimi(),
+        'uusifuksiIrc' => $uusifuksi->getIrc(),
+        'uusifuksiEmail' => $uusifuksi->getEmail()
     ));
 }

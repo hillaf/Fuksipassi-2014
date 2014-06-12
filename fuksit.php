@@ -6,5 +6,4 @@ require 'libs/tietokantayhteys.php';
 
 $fuksit = fuksi::etsiKaikkiFuksit();
 
-
 onkoKirjautunut('fuksit', array('fuksit' => $fuksit));

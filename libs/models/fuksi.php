@@ -63,6 +63,35 @@ class fuksi {
         return $tulokset;
     }
 
+    public static function etsiFuksi($id) {
+
+        $param = array();
+        $id = (int) $id;
+        $param[] = $id;
+        $sql = "SELECT fuksitunnus, nimi, ircnick, email FROM fuksi WHERE fuksitunnus = ? LIMIT 1";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute($param);
+
+        $tulokset = array();
+
+        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
+            $fuksi = new fuksi($tulos->fuksitunnus, $tulos->nimi, $tulos->ircnick, $tulos->email);
+
+            $tulokset[] = $fuksi;
+        }
+
+        return $tulokset;
+    }
+
+    public function poistaFuksi($id) {
+        $param = array();
+        $id = (int) $id;
+        $param[] = $id;
+        $sql = "DELETE FROM fuksi WHERE fuksitunnus = ?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute($param);
+    }
+
     public function lisaaKantaan() {
         $sql = "INSERT INTO fuksi(fuksitunnus, nimi, ircnick, email) VALUES(?,?,?,?) RETURNING fuksitunnus";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -100,14 +129,18 @@ class fuksi {
         } else if ($this->id <= 0) {
             $this->virheet['id'] = "Fuksitunnuksen täytyy olla positiivinen.";
         } else {
-            unset($this->virheet['fuksitunnus']);
+            unset($this->virheet['id']);
         }
 
         return empty($this->virheet);
     }
-    
-    public function getVirheet(){
+
+    public function getVirheet() {
         return $this->virheet;
+    }
+
+    public function getPoistoVirheet() {
+        return $this->poistovirheet;
     }
 
 }
