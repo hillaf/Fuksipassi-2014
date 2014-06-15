@@ -20,7 +20,7 @@ if ($tapahtuma->onkoKelvollinen()) {
     unset($_SESSION['ilmoitus']);
     $virheet = $tapahtuma->getVirheet();
 
-    onkoKirjautunut('tapahtumanmuokkausform', array(
+    onkoKirjautunut('tapahtumamuokkausform', array(
         'virheet' => $virheet,
         'muokattavatapahtuma' => $tapahtuma));
 }
