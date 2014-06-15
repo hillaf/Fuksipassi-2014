@@ -88,14 +88,14 @@ class event {
 
     public static function etsiKaikkiTapahtumat() {
 
-        $sql = "SELECT * FROM tapahtuma";
+        $sql = "SELECT * FROM tapahtuma ORDER BY pvm DESC";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
 
         $tulokset = array();
 
         foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
-            $event = new event($tulos->tapahtumatunus, $tulos->nimi, $tulos->paikka, $tulos->pvm, $tulos->aika, $tulos->linkki, $tulos->pisteet, $tulos->kuvaus);
+            $event = new event($tulos->tapahtumatunnus, $tulos->nimi, $tulos->paikka, $tulos->pvm, $tulos->aika, $tulos->linkki, $tulos->pisteet, $tulos->kuvaus);
 
             $tulokset[] = $event;
         }
@@ -103,4 +103,79 @@ class event {
         return $tulokset;
     }
 
+    public static function etsiTapahtuma($id) {
+
+        $param = array();
+        $id = (int) $id;
+        $param[] = $id;
+        $sql = "SELECT tapahtumatunnus, nimi, paikka, pvm, aika, linkki, pisteet, kuvaus FROM tapahtuma WHERE tapahtumatunnus = ? LIMIT 1";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute($param);
+
+        $tulokset = array();
+
+        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
+            $tapahtuma = new event($tulos->tapahtumatunnus, $tulos->nimi, $tulos->paikka, $tulos->pvm, $tulos->aika, $tulos->linkki, $tulos->pisteet, $tulos->kuvaus);
+
+            $tulokset[] = $tapahtuma;
+        }
+
+        return $tulokset;
+    }
+
+    public function onkoKelvollinen() {
+
+        $this->onkoLiianPitkaTaiTyhja($this->id, 'Tapahtuma-id');
+        $this->onkoLiianPitkaTaiTyhja($this->nimi, 'Nimi');
+        $this->onkoLiianPitkaTaiTyhja($this->paikka, 'Paikka');
+        $this->onkoLiianPitkaTaiTyhja($this->pvm, 'Päivämäärä');
+        $this->onkoLiianPitkaTaiTyhja($this->aika, 'Aika');
+        $this->onkoLiianPitkaTaiTyhja($this->linkki, 'Linkki');
+        $this->onkoLiianPitkaTaiTyhja($this->pisteet, 'Pisteet');
+        $this->onkoLiianPitkaTaiTyhja($this->kuvaus, 'Kuvaus');
+
+        
+        if (!is_numeric($this->id)) {
+            $this->virheet['Pisteet'] = "Pisteet tulee ilmoittaa kokonaislukuna.";
+        }
+
+        return empty($this->virheet);
+    }
+
+    function onkoLiianPitkaTaiTyhja($param, $tyyppi) {
+        if (strlen(trim($param)) > 50) {
+            $this->virheet[$tyyppi] = "$tyyppi ei saa olla yli 50 merkkiä pitkä.";
+        } else if (trim($param) == '') {
+            $this->virheet[$tyyppi] = "$tyyppi ei saa olla tyhjä.";
+        } else {
+            unset($this->virheet[$tyyppi]);
+        }
+    }
+
+    public function lisaaKantaan() {
+        $sql = "INSERT INTO tapahtuma(tapahtumatunnus, nimi, paikka, pvm, aika, linkki, pisteet, kuvaus) VALUES(?,?,?,?,?,?,?,?) RETURNING tapahtumatunnus";
+        $kysely = getTietokantayhteys()->prepare($sql);
+
+        $ok = $kysely->execute(array($this->getId(), $this->getNimi(), $this->getPaikka(), $this->getPvm(), $this->getAika(), $this->getLinkki(), $this->getPisteet(), $this->getKuvaus()));
+        if ($ok) {
+            //Haetaan RETURNING-määreen palauttama id.
+            //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!
+            $this->id = $kysely->fetchColumn();
+        }
+        return $ok;
+    }
+    
+        public function poistaTapahtuma($id) {
+        $param = array();
+        $id = (int) $id;
+        $param[] = $id;
+        $sql = "DELETE FROM tapahtuma WHERE tapahtumatunnus = ?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute($param);
+    }
+
+    
+    public function getVirheet(){
+        return $this->virheet;
+    }
 }

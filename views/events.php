@@ -4,13 +4,14 @@
 
 
         <?php if (isset($_SESSION['ilmoitus'])): ?>
+            <br>
             <div class="alert alert-success"><?php echo $_SESSION['ilmoitus']; ?></div>
             <?php unset($_SESSION['ilmoitus']); ?>
         <?php endif; ?>
 
 
         <?php if (!empty($data->virheet)): ?>
-
+            <br>
             <?php foreach ($data->virheet as $virhe): ?>
                 <div class="alert alert-danger"><?php echo $virhe; ?></div>
             <?php endforeach; ?>
@@ -23,7 +24,7 @@
         <br>
         <div class="btn-group" id="lisays">
             <div class="form-group">
-                <form class="form-group" role="form">
+                <form class="form-group" role="form" action="tapahtumalisaysform.php">
                     <button type="submit" class="btn btn-default">Lisää tapahtuma</button>
                 </form>
             </div>
@@ -46,7 +47,7 @@
 
                 <?php foreach ($data->events as $event): ?>
 
-                    <tr onclick="window.location.href = 'event.php?id=<?php echo $event->getId(); ?>';">
+                    <tr onclick="window.location.href = 'tapahtuma.php?id=<?php echo $event->getId(); ?>';">
                         <td><?php echo htmlspecialchars($event->getNimi()); ?></td>
                         <td><?php echo htmlspecialchars($event->getPaikka()); ?></td>
                         <td><?php echo htmlspecialchars($event->getPvm()); ?></td>

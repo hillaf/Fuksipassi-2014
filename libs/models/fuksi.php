@@ -48,7 +48,7 @@ class fuksi {
 
     public static function etsiKaikkiFuksit() {
 
-        $sql = "SELECT * FROM fuksi";
+        $sql = "SELECT * FROM fuksi ORDER BY nimi";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute();
 
@@ -127,11 +127,9 @@ class fuksi {
         $this->onkoLiianPitkaTaiTyhja($this->id, 'Fuksi-id');
 
         if (!is_numeric($this->id)) {
-            $this->virheet['id'] = "Fuksi-id tulee olla numero.";
+            $this->virheet['Fuksi-id'] = "Fuksi-id tulee olla numero.";
         } else if ($this->id <= 0) {
-            $this->virheet['id'] = "Fuksi-id täytyy olla positiivinen.";
-        } else {
-            unset($this->virheet['id']);
+            $this->virheet['Fuksi-id'] = "Fuksi-id täytyy olla positiivinen.";
         }
 
         return empty($this->virheet);

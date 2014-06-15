@@ -2,9 +2,6 @@
 
     <div class="container">
 
-
-
-
         <?php if (!empty($data->virheet)): ?>
             <br>
             <?php foreach ($data->virheet as $virhe): ?>
