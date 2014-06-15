@@ -173,6 +173,19 @@ class event {
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute($param);
     }
+    
+    public function paivitaKantaan() {
+        $sql = "UPDATE tapahtuma SET nimi = ?, paikka = ?, pvm = ?, aika = ?, linkki = ?, pisteet = ?, kuvaus = ? WHERE tapahtumatunnus = ? RETURNING tapahtumatunnus";
+        $kysely = getTietokantayhteys()->prepare($sql);
+
+        $ok = $kysely->execute(array($this->getNimi(), $this->getPaikka(), $this->getPvm(), $this->getAika(), $this->getLinkki(), $this->getPisteet(), $this->getKuvaus(), $this->getId()));
+        if ($ok) {
+            //Haetaan RETURNING-määreen palauttama id.
+            //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!
+            $this->id = $kysely->fetchColumn();
+        }
+        return $ok;
+    }
 
     
     public function getVirheet(){
