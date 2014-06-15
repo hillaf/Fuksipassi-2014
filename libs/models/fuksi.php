@@ -104,35 +104,48 @@ class fuksi {
         }
         return $ok;
     }
+    
+    public function paivitaKantaan() {
+        $sql = "UPDATE fuksi SET nimi = ?, ircnick = ?, email = ? WHERE fuksitunnus = ? RETURNING fuksitunnus";
+        $kysely = getTietokantayhteys()->prepare($sql);
+
+        $ok = $kysely->execute(array($this->getNimi(), $this->getIrc(), $this->getEmail(), $this->getId()));
+        if ($ok) {
+            //Haetaan RETURNING-määreen palauttama id.
+            //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!
+            $this->id = $kysely->fetchColumn();
+        }
+        return $ok;
+    }
 
     public function onkoKelvollinen() {
-        if (trim($this->nimi) == '') {
-            $this->virheet['nimi'] = "Nimi ei saa olla tyhjä.";
-        } else {
-            unset($this->virheet['nimi']);
-        }
 
-        if (trim($this->irc) == '') {
-            $this->virheet['irc'] = "Ircnick ei saa olla tyhjä.";
-        } else {
-            unset($this->virheet['irc']);
-        }
 
-        if (trim($this->email) == '') {
-            $this->virheet['email'] = "Email ei saa olla tyhjä.";
-        } else {
-            unset($this->virheet['email']);
-        }
+        $this->onkoLiianPitkaTaiTyhja($this->nimi, 'Nimi');
+        $this->onkoLiianPitkaTaiTyhja($this->irc, 'Ircnick');
+        $this->onkoLiianPitkaTaiTyhja($this->email, 'Email');
+        $this->onkoLiianPitkaTaiTyhja($this->id, 'Fuksi-id');
 
         if (!is_numeric($this->id)) {
-            $this->virheet['id'] = "Fuksitunnuksen tulee olla numero.";
+            $this->virheet['id'] = "Fuksi-id tulee olla numero.";
         } else if ($this->id <= 0) {
-            $this->virheet['id'] = "Fuksitunnuksen täytyy olla positiivinen.";
+            $this->virheet['id'] = "Fuksi-id täytyy olla positiivinen.";
         } else {
             unset($this->virheet['id']);
         }
 
         return empty($this->virheet);
+    }
+
+    function onkoLiianPitkaTaiTyhja($param, $tyyppi) {
+        if (strlen(trim($param)) > 50) {
+            $this->virheet[$tyyppi] = "$tyyppi ei saa olla yli 50 merkkiä pitkä.";
+        } else if (trim($param) == '') {
+            $this->virheet[$tyyppi] = "$tyyppi ei saa olla tyhjä.";
+        } else {
+           unset($this->virheet[$tyyppi]); 
+        }
+        
     }
 
     public function getVirheet() {
