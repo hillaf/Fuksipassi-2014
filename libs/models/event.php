@@ -125,7 +125,6 @@ class event {
 
     public function onkoKelvollinen() {
 
-        $this->onkoLiianPitkaTaiTyhja($this->id, 'Tapahtuma-id');
         $this->onkoLiianPitkaTaiTyhja($this->nimi, 'Nimi');
         $this->onkoLiianPitkaTaiTyhja($this->paikka, 'Paikka');
         $this->onkoLiianPitkaTaiTyhja($this->pvm, 'Päivämäärä');
@@ -135,8 +134,10 @@ class event {
         $this->onkoLiianPitkaTaiTyhja($this->kuvaus, 'Kuvaus');
 
         
-        if (!is_numeric($this->id)) {
-            $this->virheet['Pisteet'] = "Pisteet tulee ilmoittaa kokonaislukuna.";
+        if (!is_numeric($this->pisteet)) {
+            $this->virheet['Pisteetlukuna'] = "Pisteet tulee ilmoittaa kokonaislukuna.";
+        } else {
+            unset($this->virheet['Pisteetlukuna']);
         }
 
         return empty($this->virheet);
@@ -153,10 +154,10 @@ class event {
     }
 
     public function lisaaKantaan() {
-        $sql = "INSERT INTO tapahtuma(tapahtumatunnus, nimi, paikka, pvm, aika, linkki, pisteet, kuvaus) VALUES(?,?,?,?,?,?,?,?) RETURNING tapahtumatunnus";
+        $sql = "INSERT INTO tapahtuma(tapahtumatunnus, nimi, paikka, pvm, aika, linkki, pisteet, kuvaus) VALUES(nextval('tapahtuma_id_seq'),?,?,?,?,?,?,?) RETURNING tapahtumatunnus";
         $kysely = getTietokantayhteys()->prepare($sql);
 
-        $ok = $kysely->execute(array($this->getId(), $this->getNimi(), $this->getPaikka(), $this->getPvm(), $this->getAika(), $this->getLinkki(), $this->getPisteet(), $this->getKuvaus()));
+        $ok = $kysely->execute(array($this->getNimi(), $this->getPaikka(), $this->getPvm(), $this->getAika(), $this->getLinkki(), $this->getPisteet(), $this->getKuvaus()));
         if ($ok) {
             //Haetaan RETURNING-määreen palauttama id.
             //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!

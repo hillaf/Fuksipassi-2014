@@ -2,16 +2,17 @@
 
 class fuksi {
 
+    private $virheet = array();
     private $id;
     private $nimi;
     private $irc;
     private $email;
 
-    public function __construct($id, $nimi, $irc, $email) {
-        $this->id = $id;
+    public function __construct($nimi, $irc, $email) {
         $this->nimi = $nimi;
         $this->irc = $irc;
         $this->email = $email;
+        $this->id = '';
     }
 
     public function getId() {
@@ -93,10 +94,10 @@ class fuksi {
     }
 
     public function lisaaKantaan() {
-        $sql = "INSERT INTO fuksi(fuksitunnus, nimi, ircnick, email) VALUES(?,?,?,?) RETURNING fuksitunnus";
+        $sql = "INSERT INTO fuksi(fuksitunnus, nimi, ircnick, email) VALUES(nextval('fuksi_id_seq'),?,?,?) RETURNING fuksitunnus";
         $kysely = getTietokantayhteys()->prepare($sql);
 
-        $ok = $kysely->execute(array($this->getId(), $this->getNimi(), $this->getIrc(), $this->getEmail()));
+        $ok = $kysely->execute(array($this->getNimi(), $this->getIrc(), $this->getEmail()));
         if ($ok) {
             //Haetaan RETURNING-määreen palauttama id.
             //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!
@@ -124,13 +125,6 @@ class fuksi {
         $this->onkoLiianPitkaTaiTyhja($this->nimi, 'Nimi');
         $this->onkoLiianPitkaTaiTyhja($this->irc, 'Ircnick');
         $this->onkoLiianPitkaTaiTyhja($this->email, 'Email');
-        $this->onkoLiianPitkaTaiTyhja($this->id, 'Fuksi-id');
-
-        if (!is_numeric($this->id)) {
-            $this->virheet['Fuksi-id'] = "Fuksi-id tulee olla numero.";
-        } else if ($this->id <= 0) {
-            $this->virheet['Fuksi-id'] = "Fuksi-id täytyy olla positiivinen.";
-        }
 
         return empty($this->virheet);
     }
@@ -143,7 +137,6 @@ class fuksi {
         } else {
            unset($this->virheet[$tyyppi]); 
         }
-        
     }
 
     public function getVirheet() {

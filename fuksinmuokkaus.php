@@ -4,8 +4,8 @@ require 'libs/common.php';
 require 'libs/models/fuksi.php';
 require 'libs/tietokantayhteys.php';
 
-$id = (int) $_POST['fuksitunnus'];
-$fuksi = new fuksi($id, $_POST['nimi'], $_POST['ircnick'], $_POST['email']);
+
+$fuksi = new fuksi($_POST['nimi'], $_POST['ircnick'], $_POST['email']);
 
 if ($fuksi->onkoKelvollinen()) {
     $fuksi->paivitaKantaan();

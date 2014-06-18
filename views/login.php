@@ -19,6 +19,10 @@
             </div>
             <button type="submit" class="btn btn-default">Kirjaudu sisään</button>
         </form>
+            <p>
+                <a href="rekisteroityminen.php">Rekisteröidy</a>
+            </p>
+            
     </div>
 </body>
 </html>

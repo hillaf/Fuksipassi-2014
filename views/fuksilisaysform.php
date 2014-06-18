@@ -1,5 +1,3 @@
-<body>
-
     <div class="container">
 
         <?php if (!empty($data->virheet)): ?>
@@ -16,10 +14,7 @@
         <div class="lisays">
 
             <form role="form" action="fuksilisays.php" method="POST">
-                <div class="form-group">
-                    <label for="fuksitunnus">Fuksi-id</label>
-                    <input type="text" class="form-control" name="fuksitunnus" id="fuksitunnus" placeholder="Joku uniikki numerosarja" value="<?php echo htmlspecialchars($data->uusifuksiId); ?>">
-                </div>
+
                 <div class="form-group">
                     <label for="nimi">Nimi</label>
                     <input type="text" class="form-control" name="nimi" id="nimi" placeholder="Nimi" value="<?php echo htmlspecialchars($data->uusifuksiNimi); ?>">
@@ -37,5 +32,3 @@
 
         </div>
     </div>
-
-</body>
