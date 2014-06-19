@@ -11,8 +11,7 @@ class event {
     private $pisteet;
     private $kuvaus;
 
-    public function __construct($id, $nimi, $paikka, $pvm, $aika, $linkki, $pisteet, $kuvaus) {
-        $this->id = $id;
+    public function __construct($nimi, $paikka, $pvm, $aika, $linkki, $pisteet, $kuvaus) {
         $this->nimi = $nimi;
         $this->paikka = $paikka;
         $this->pvm = $pvm;
@@ -95,8 +94,9 @@ class event {
         $tulokset = array();
 
         foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
-            $event = new event($tulos->tapahtumatunnus, $tulos->nimi, $tulos->paikka, $tulos->pvm, $tulos->aika, $tulos->linkki, $tulos->pisteet, $tulos->kuvaus);
-
+            $event = new event($tulos->nimi, $tulos->paikka, $tulos->pvm, $tulos->aika, $tulos->linkki, $tulos->pisteet, $tulos->kuvaus);
+            $event->setId($tulos->tapahtumatunnus);
+            
             $tulokset[] = $event;
         }
 
@@ -115,8 +115,9 @@ class event {
         $tulokset = array();
 
         foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
-            $tapahtuma = new event($tulos->tapahtumatunnus, $tulos->nimi, $tulos->paikka, $tulos->pvm, $tulos->aika, $tulos->linkki, $tulos->pisteet, $tulos->kuvaus);
-
+            $tapahtuma = new event($tulos->nimi, $tulos->paikka, $tulos->pvm, $tulos->aika, $tulos->linkki, $tulos->pisteet, $tulos->kuvaus);
+            $tapahtuma->setId($tulos->tapahtumatunnus);
+            
             $tulokset[] = $tapahtuma;
         }
 
@@ -132,6 +133,18 @@ class event {
         $this->onkoLiianPitkaTaiTyhja($this->linkki, 'Linkki');
         $this->onkoLiianPitkaTaiTyhja($this->pisteet, 'Pisteet');
         $this->onkoLiianPitkaTaiTyhja($this->kuvaus, 'Kuvaus');
+        
+        if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $this->pvm)){
+            $this->virheet['Pvmmuoto'] = "Annanthan päivämäärän muodossa yyyy-mm-dd.";
+        } else {
+            unset($this->virheet['Pvmmuoto']);
+        }
+        
+        if (!preg_match("/(\d{2}):(\d{2})/", $this->aika)){
+            $this->virheet['Aikamuoto'] = "Annanthan ajan muodossa hh:mm.";
+        } else {
+            unset($this->virheet['Aikamuoto']);
+        }
 
         
         if (!is_numeric($this->pisteet)) {
@@ -163,7 +176,7 @@ class event {
             //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!
             $this->id = $kysely->fetchColumn();
         }
-        return $ok;
+        return $this->id;
     }
     
         public function poistaTapahtuma($id) {

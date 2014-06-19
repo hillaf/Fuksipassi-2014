@@ -2,6 +2,12 @@
 
     <div class="container">
 
+        <?php if (isset($_SESSION['ilmoitus'])): ?>
+            <br>
+            <div class="alert alert-success"><?php echo $_SESSION['ilmoitus']; ?></div>
+            <?php unset($_SESSION['ilmoitus']); ?>
+        <?php endif; ?>
+
         <h1>Kirjaudu sisään</h1>
 
         <?php if (!empty($data->virhe)): ?>
@@ -19,10 +25,10 @@
             </div>
             <button type="submit" class="btn btn-default">Kirjaudu sisään</button>
         </form>
-            <p>
-                <a href="rekisteroityminen.php">Rekisteröidy</a>
-            </p>
-            
+        <p>
+            <a href="rekisteroityminen.php">Rekisteröidy</a>
+        </p>
+
     </div>
 </body>
 </html>

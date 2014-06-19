@@ -56,7 +56,8 @@ class fuksi {
         $tulokset = array();
 
         foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
-            $fuksi = new fuksi($tulos->fuksitunnus, $tulos->nimi, $tulos->ircnick, $tulos->email);
+            $fuksi = new fuksi($tulos->nimi, $tulos->ircnick, $tulos->email);
+            $fuksi->setId($tulos->fuksitunnus);
 
             $tulokset[] = $fuksi;
         }
@@ -76,7 +77,8 @@ class fuksi {
         $tulokset = array();
 
         foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
-            $fuksi = new fuksi($tulos->fuksitunnus, $tulos->nimi, $tulos->ircnick, $tulos->email);
+            $fuksi = new fuksi($tulos->nimi, $tulos->ircnick, $tulos->email);
+            $fuksi->setId($tulos->fuksitunnus);
 
             $tulokset[] = $fuksi;
         }
@@ -103,7 +105,7 @@ class fuksi {
             //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!
             $this->id = $kysely->fetchColumn();
         }
-        return $ok;
+        return $this->id;
     }
     
     public function paivitaKantaan() {
@@ -116,7 +118,7 @@ class fuksi {
             //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!
             $this->id = $kysely->fetchColumn();
         }
-        return $ok;
+        return $this->id;
     }
 
     public function onkoKelvollinen() {

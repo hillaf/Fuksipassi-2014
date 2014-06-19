@@ -5,6 +5,7 @@ require 'libs/models/fuksi.php';
 require 'libs/tietokantayhteys.php';
 
 $uusifuksi = new fuksi($_POST['nimi'], $_POST['ircnick'], $_POST['email']);
+$uusifuksi->setId($_GET['id']);
 
 if ($uusifuksi->onkoKelvollinen()) {
     $uusifuksi->lisaaKantaan();

@@ -5,7 +5,8 @@ require 'libs/models/event.php';
 require 'libs/tietokantayhteys.php';
 
 $id = (int) $_POST['tapahtumatunnus'];
-$tapahtuma = new event($id, $_POST['nimi'], $_POST['paikka'], $_POST['pvm'], $_POST['aika'], $_POST['linkki'], $_POST['pisteet'], $_POST['kuvaus']);
+$tapahtuma = new event($_POST['nimi'], $_POST['paikka'], $_POST['pvm'], $_POST['aika'], $_POST['linkki'], $_POST['pisteet'], $_POST['kuvaus']);
+$tapahtuma->setId($id);
 
 if ($tapahtuma->onkoKelvollinen()) {
     $tapahtuma->paivitaKantaan();

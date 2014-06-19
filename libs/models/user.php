@@ -58,7 +58,8 @@ class user {
         if ($tulos == null) {
             return null;
         } else {
-            $kayttaja = new user($tulos->id, $tulos->tunnus, $tulos->password);
+            $kayttaja = new user($tulos->tunnus, $tulos->password, $tulos->password);
+            $kayttaja->setId($tulos->id);
 
 
             return $kayttaja;
@@ -66,10 +67,10 @@ class user {
     }
 
     public function lisaaKantaan($foreignid) {
-        $sql = "INSERT INTO user(id, nimi, ircnick, email, fuksitunnus) VALUES(nextval('user_id_seq'),?,?,?, ?) RETURNING id";
+        $sql = "INSERT INTO users(id, tunnus, password, fuksitunnus) VALUES(nextval('user_id_seq'),?,?,?) RETURNING id";
         $kysely = getTietokantayhteys()->prepare($sql);
 
-        $ok = $kysely->execute(array($this->getNimi(), $this->getIrc(), $this->getEmail(), $foreignid));
+        $ok = $kysely->execute(array($this->getTunnus(), $this->getSalasana(), $foreignid));
         if ($ok) {
             //Haetaan RETURNING-määreen palauttama id.
             //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!

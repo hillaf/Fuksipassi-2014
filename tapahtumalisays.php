@@ -4,7 +4,8 @@ require 'libs/common.php';
 require 'libs/models/event.php';
 require 'libs/tietokantayhteys.php';
 
-$uusitapahtuma = new event($_POST['tapahtumatunnus'], $_POST['nimi'], $_POST['paikka'], $_POST['pvm'], $_POST['aika'], $_POST['linkki'], $_POST['pisteet'], $_POST['kuvaus']);
+$uusitapahtuma = new event($_POST['nimi'], $_POST['paikka'], $_POST['pvm'], $_POST['aika'], $_POST['linkki'], $_POST['pisteet'], $_POST['kuvaus']);
+
 
 if ($uusitapahtuma->onkoKelvollinen()) {
     $uusitapahtuma->lisaaKantaan();

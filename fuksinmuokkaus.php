@@ -6,6 +6,7 @@ require 'libs/tietokantayhteys.php';
 
 
 $fuksi = new fuksi($_POST['nimi'], $_POST['ircnick'], $_POST['email']);
+$fuksi->setId($_POST['fuksitunnus']);
 
 if ($fuksi->onkoKelvollinen()) {
     $fuksi->paivitaKantaan();
