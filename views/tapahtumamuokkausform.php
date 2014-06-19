@@ -46,7 +46,7 @@
                 </div>
                 <div class="form-group">
                     <label for="kuvaus">Kuvaus</label>
-                    <input type="text" class="form-control" name="kuvaus" id="pisteet" placeholder="Kuvaus" value="<?php echo htmlspecialchars($data->muokattavatapahtuma->getKuvaus()); ?>">
+                    <textarea class="form-control" rows="4" name="kuvaus" id="pisteet" placeholder="Kuvaus"><?php echo htmlspecialchars($data->muokattavatapahtuma->getKuvaus()); ?></textarea>
                 </div>
                 <button type="submit" class="btn btn-default">Tallenna</button>
 

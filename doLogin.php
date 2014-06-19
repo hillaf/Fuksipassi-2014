@@ -14,9 +14,10 @@
   $kirjautuja = user::etsiKayttajaTunnuksilla($kayttaja, $salasana);
   
   if ($kirjautuja != null) {
-    /* Jos tunnus on oikea, ohjataan käyttäjä sopivalla HTTP-otsakkeella kissalistaan. */
+    /* Jos tunnus on oikea, ohjataan käyttäjä sopivalla HTTP-otsakkeella eteenpäin. */
    
       $_SESSION['kirjautunut'] = $kirjautuja->getTunnus();
+      $_SESSION['kirjautuneenID'] = $kirjautuja->getId();
       
       header('Location: index.php');
   } else {

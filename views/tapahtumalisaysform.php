@@ -45,7 +45,7 @@
                 </div>
                 <div class="form-group">
                     <label for="kuvaus">Kuvaus</label>
-                    <input type="text" class="form-control" name="kuvaus" id="kuvaus" placeholder="Tapahtuman kuvaus" value="<?php echo htmlspecialchars($data->uusitapahtumakuvaus); ?>">
+                    <textarea rows="4" class="form-control" name="kuvaus" id="kuvaus" placeholder="Tapahtuman kuvaus"><?php echo htmlspecialchars($data->uusitapahtumakuvaus); ?></textarea>
                 </div>
                 <button type="submit" class="btn btn-default">Lisää</button>
             </form>

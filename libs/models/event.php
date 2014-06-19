@@ -132,7 +132,7 @@ class event {
         $this->onkoLiianPitkaTaiTyhja($this->aika, 'Aika');
         $this->onkoLiianPitkaTaiTyhja($this->linkki, 'Linkki');
         $this->onkoLiianPitkaTaiTyhja($this->pisteet, 'Pisteet');
-        $this->onkoLiianPitkaTaiTyhja($this->kuvaus, 'Kuvaus');
+        $this->onkoKuvausLiianPitkaTaiTyhja($this->kuvaus, 'Kuvaus');
         
         if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $this->pvm)){
             $this->virheet['Pvmmuoto'] = "Annanthan päivämäärän muodossa yyyy-mm-dd.";
@@ -158,6 +158,16 @@ class event {
 
     function onkoLiianPitkaTaiTyhja($param, $tyyppi) {
         if (strlen(trim($param)) > 50) {
+            $this->virheet[$tyyppi] = "$tyyppi ei saa olla yli 50 merkkiä pitkä.";
+        } else if (trim($param) == '') {
+            $this->virheet[$tyyppi] = "$tyyppi ei saa olla tyhjä.";
+        } else {
+            unset($this->virheet[$tyyppi]);
+        }
+    }
+    
+    function onkoKuvausLiianPitkaTaiTyhja($param, $tyyppi) {
+        if (strlen(trim($param)) > 500) {
             $this->virheet[$tyyppi] = "$tyyppi ei saa olla yli 50 merkkiä pitkä.";
         } else if (trim($param) == '') {
             $this->virheet[$tyyppi] = "$tyyppi ei saa olla tyhjä.";

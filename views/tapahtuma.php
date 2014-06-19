@@ -7,6 +7,14 @@
             <?php unset($_SESSION['ilmoitus']); ?>
         <?php endif; ?>
 
+        <?php if (!empty($data->virheet)): ?>
+            <br>
+            <?php foreach ($data->virheet as $virhe): ?>
+                <div class="alert alert-danger"><?php echo $virhe; ?></div>
+            <?php endforeach; ?>
+
+        <?php endif; ?>
+
         <h1><?php echo htmlspecialchars($data->naytettavatapahtuma->getNimi()); ?></h1>
 
         <br>
@@ -63,6 +71,7 @@
         </div>
 
         <br>
+
 
 
         <div class="form-group">
