@@ -38,6 +38,37 @@
                     <p class="form-control-static"><?php echo htmlspecialchars($data->pisteet); ?></p>
                 </div>
             </div>
+            <br>
+            <h4>Olet osallistunut seuraaviin tapahtumiin:</h4>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Tapahtuma</th>
+                        <th>Paikka</th>
+                        <th>Päivämäärä</th>
+                        <th>Aika</th>
+                        <th>Pisteet</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    <?php foreach ($data->osallistututTapahtumat as $event): ?>
+
+                        <tr onclick="window.location.href = 'tapahtuma.php?id=<?php echo $event->getId(); ?>';">
+                            <td><?php echo htmlspecialchars($event->getNimi()); ?></td>
+                            <td><?php echo htmlspecialchars($event->getPaikka()); ?></td>
+                            <td><?php echo htmlspecialchars($event->getPvm()); ?></td>
+                            <td><?php echo htmlspecialchars($event->getAika()); ?></td>
+                            <td><?php echo htmlspecialchars($event->getPisteet()); ?></td>
+                        </tr>
+
+                    <?php endforeach; ?>
+
+                </tbody>
+            </table>
+
         <?php endif ?>
     </form>
 </div>

@@ -123,6 +123,8 @@ class event {
 
         return $tulokset;
     }
+    
+ 
 
     public function onkoKelvollinen() {
 

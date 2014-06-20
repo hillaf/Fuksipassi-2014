@@ -107,7 +107,7 @@ class fuksi {
         }
         return $this->id;
     }
-    
+
     public function paivitaKantaan() {
         $sql = "UPDATE fuksi SET nimi = ?, ircnick = ?, email = ? WHERE fuksitunnus = ? RETURNING fuksitunnus";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -120,18 +120,36 @@ class fuksi {
         }
         return $this->id;
     }
-    
-    public function getPisteet(){
+
+    // palauttaa listana niiden tapahtumien id:t, joihin fuksi on osallistunut
+
+    public static function etsiFuksinTapahtumat($fuksiID) {
+
+
+        $sql = "SELECT tapahtumatunnus FROM osallistuminen WHERE fuksitunnus = ?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($fuksiID));
+
+        $tulokset = array();
+
+        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
+            $tulokset[] = $tulos->tapahtumatunnus;
+        }
+
+        return $tulokset;
+    }
+
+    public function getPisteet() {
         $sql = "SELECT SUM(pisteet) FROM osallistuminen WHERE fuksitunnus = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
 
         $ok = $kysely->execute(array($this->getId()));
         $tulos = $kysely->fetchColumn();
-        
-        if ($tulos == null){
+
+        if ($tulos == null) {
             $tulos = 0;
         }
-                
+
         return $tulos;
     }
 
@@ -151,7 +169,7 @@ class fuksi {
         } else if (trim($param) == '') {
             $this->virheet[$tyyppi] = "$tyyppi ei saa olla tyhjä.";
         } else {
-           unset($this->virheet[$tyyppi]); 
+            unset($this->virheet[$tyyppi]);
         }
     }
 

@@ -82,5 +82,7 @@ class osallistuminen {
             return true;
         }
     }
+    
+    
 
 }
