@@ -11,6 +11,8 @@ function naytaNakyma($sivu, $data = array()) {
 function onkoKirjautunut($kohde, $data = array()) {
     
     if (isset($_SESSION['kirjautunut'])) {
+       
+        
         naytaNakyma($kohde, $data);
     } else {
         naytaNakyma('login', $data);

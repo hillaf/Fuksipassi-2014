@@ -11,7 +11,7 @@
         <h1>Kirjaudu sisään</h1>
 
         <?php if (!empty($data->virhe)): ?>
-            <div class="alert alert-danger">Virhe! <?php echo $data->virhe; ?></div>
+            <div class="alert alert-danger"><?php echo $data->virhe; ?></div>
         <?php endif; ?>
 
         <form action="doLogin.php" method="POST">

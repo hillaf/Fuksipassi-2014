@@ -1,6 +1,7 @@
 <?php
   require_once 'libs/common.php';
   require_once 'libs/models/user.php';
+  require_once 'libs/models/tutor.php';
   
   if (empty($_POST["username"]) || empty($_POST["password"])) {
      /* Käytetään omassa kirjastotiedostossa määriteltyä näkymännäyttöfunktioita */
@@ -18,6 +19,10 @@
    
       $_SESSION['kirjautunut'] = $kirjautuja->getTunnus();
       $_SESSION['kirjautuneenID'] = $kirjautuja->getId();
+      
+      if(!tutor::onkoTutor($kirjautuja->getId())){
+          $_SESSION['tutor'] = $kirjautuja->getId();
+      }
       
       header('Location: index.php');
   } else {

@@ -21,6 +21,7 @@
 
         <h1>Tapahtumat</h1>
 
+        <?php if (isset($_SESSION['tutor'])): ?>
         <br>
         <div class="btn-group" id="lisays">
             <div class="form-group">
@@ -29,6 +30,9 @@
                 </form>
             </div>
         </div>
+        
+        <?php endif ?>
+        
         <br>
 
 

@@ -72,21 +72,32 @@
 
         <br>
 
+        <?php if (!isset($_SESSION['tutor'])): ?>
+
+            <div class="form-group">
+                <form class="form-group" role="form" method="POST" action="luoOsallistuminen.php">
+                    <input type="hidden" name="id" value="<?php echo $data->naytettavatapahtuma->getId(); ?>">
+                    <button type="submit" class="btn btn-default">Osallistuin</button>
+                </form>
+            </div>
+
+        <?php endif ?>
 
 
-        <div class="form-group">
-            <form class="form-group" role="form" method="POST" action="tapahtumapoisto.php">
-                <input type="hidden" name="id" value="<?php echo $data->naytettavatapahtuma->getId(); ?>">
-                <button type="submit" class="btn btn-default">Poista tapahtuma</button>
-            </form>
-        </div>
-        <div class="form-group">
-            <form class="form-group" role="form" method="POST" action="tapahtumamuokkausform.php">
-                <input type="hidden" name="id" value="<?php echo $data->naytettavatapahtuma->getId(); ?>">
-                <button type="submit" class="btn btn-default">Muokkaa tapahtuman tietoja</button>
-            </form>
-        </div>
-
+        <?php if (isset($_SESSION['tutor'])): ?>
+            <div class="form-group">
+                <form class="form-group" role="form" method="POST" action="tapahtumapoisto.php">
+                    <input type="hidden" name="id" value="<?php echo $data->naytettavatapahtuma->getId(); ?>">
+                    <button type="submit" class="btn btn-default">Poista tapahtuma</button>
+                </form>
+            </div>
+            <div class="form-group">
+                <form class="form-group" role="form" method="POST" action="tapahtumamuokkausform.php">
+                    <input type="hidden" name="id" value="<?php echo $data->naytettavatapahtuma->getId(); ?>">
+                    <button type="submit" class="btn btn-default">Muokkaa tapahtuman tietoja</button>
+                </form>
+            </div>
+        <?php endif ?>
 
 
     </div>

@@ -6,4 +6,12 @@ require 'libs/tietokantayhteys.php';
 
 $fuksit = fuksi::etsiKaikkiFuksit();
 
-onkoKirjautunut('fuksit', array('fuksit' => $fuksit));
+if (isset($_SESSION['tutor'])){
+    onkoKirjautunut('fuksit', array('fuksit' => $fuksit));
+} else {
+   
+    onkoKirjautunut('index', array(
+        'virhe' => "Vain tutoreilla on oikeus tarkastella muiden fuksien tietoja."
+    ));
+}
+

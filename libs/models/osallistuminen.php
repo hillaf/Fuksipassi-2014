@@ -1,5 +1,6 @@
 <?php
 
+
 class osallistuminen {
 
     private $id;
@@ -8,12 +9,10 @@ class osallistuminen {
     private $pisteet;
     private $tutorid;
 
-    public function __construct($id, $tapahtumaid, $fuksiid, $pisteet, $tutorid) {
-        $this->id = $id;
+    public function __construct($tapahtumaid, $fuksiid, $pisteet) {
         $this->tapahtumaid = $tapahtumaid;
         $this->fuksiid = $fuksiid;
         $this->pisteet = $pisteet;
-        $this->tutorid = $tutorid;
     }
 
     public function getId() {
@@ -55,5 +54,19 @@ class osallistuminen {
     public function setTutoriid($tutoriid) {
         $this->tutoriid = $tutoriid;
     }
+
+    public function lisaaAlustavaOsallistuminenKantaan() {
+        $sql = "INSERT INTO osallistuminen(otunnus, tapahtumatunnus, fuksitunnus, pisteet) VALUES(nextval('osallistuminen_id_seq'),?,?,?) RETURNING otunnus";
+        $kysely = getTietokantayhteys()->prepare($sql);
+
+        $ok = $kysely->execute(array($this->getTapahtumaid(), $this->getFuksiid(), $this->getPisteet()));
+        if ($ok) {
+            //Haetaan RETURNING-määreen palauttama id.
+            //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!
+            $this->id = $kysely->fetchColumn();
+        }
+        return $this->id;
+    }
+    
 
 }
