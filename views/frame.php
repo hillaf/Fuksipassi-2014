@@ -16,7 +16,37 @@
                 <li><a href="logout.php">Kirjaudu ulos</a></li>
             </ul>
         </div>
+
+
         <div class="container">
+
+            <!--virheilmoitukset, siivoan myöhemmin!-->
+
+            <?php if (!empty($data->virhe)): ?>
+                <br>
+                <div class="alert alert-danger"><?php echo $data->virhe; ?></div>
+            <?php endif; ?>
+            <?php if (!empty($data->virheet)): ?>
+                <br>
+                <?php foreach ($data->virheet as $virhe): ?>
+                    <div class="alert alert-danger"><?php echo $virhe; ?></div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <?php if (!empty($data->uservirheet)): ?>
+                <br>
+                <?php foreach ($data->uservirheet as $virhe): ?>
+                    <div class="alert alert-danger"><?php echo $virhe; ?></div>
+                <?php endforeach; ?>
+
+            <?php endif; ?>
+            <?php if (isset($_SESSION['ilmoitus'])): ?>
+                <br>
+                <div class="alert alert-success"><?php echo $_SESSION['ilmoitus']; ?></div>
+                <?php unset($_SESSION['ilmoitus']); ?>
+            <?php endif; ?>
+
+
+
             <?php
             /* HTML-rungon keskellä on sivun sisältö, 
              * joka haetaan sopivasta näkymätiedostosta.
@@ -27,6 +57,7 @@
             ?>
 
         </div>
+    </body>
 
 
 </html>

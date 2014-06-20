@@ -1,20 +1,16 @@
+<h1>Hei, <?php echo $_SESSION['kirjautunut']; ?></h1>
 
-<div class="container">
+<p>Olet kirjautunut sisään.</p>
+<br>
+<p>Debug:</p>
 
-    <?php if (isset($_SESSION['ilmoitus'])): ?>
-        <br>
-        <div class="alert alert-success"><?php echo $_SESSION['ilmoitus']; ?></div>
-        <?php unset($_SESSION['ilmoitus']); ?>
-    <?php endif; ?>
+<p> 
+    tunnus: <?php echo $_SESSION['kirjautunut']; ?>
+    <br>
+    id: <?php echo $_SESSION['kirjautuneenID']; ?>
+    <br>
+    tutortunnus: <?php echo $_SESSION['tutor']; ?>
+    <br>
+    fuksitunnus: <?php echo $_SESSION['fuksi']; ?>
+</p>
 
-    <?php if (!empty($data->virhe)): ?>
-        <br>
-        <div class="alert alert-danger"><?php echo $data->virhe; ?></div>
-    <?php endif; ?>
-
-    <h1>Hei, <?php echo $_SESSION['kirjautunut']; ?></h1>
-
-    <p>Olet kirjautunut sisään.</p>
-
-
-</div>

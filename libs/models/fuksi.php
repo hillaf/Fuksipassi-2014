@@ -120,6 +120,20 @@ class fuksi {
         }
         return $this->id;
     }
+    
+    public function getPisteet(){
+        $sql = "SELECT SUM(pisteet) FROM osallistuminen WHERE fuksitunnus = ?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+
+        $ok = $kysely->execute(array($this->getId()));
+        $tulos = $kysely->fetchColumn();
+        
+        if ($tulos == null){
+            $tulos = 0;
+        }
+                
+        return $tulos;
+    }
 
     public function onkoKelvollinen() {
 

@@ -1,19 +1,43 @@
-    <body>
-        <div class="container">
+<h1>Omat tiedot</h1>
 
-        <h1><?php echo "Omat tiedot" ?></h1>
-        
-            <form role="form">
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Nimi</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Nimi">
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Email</label>
-                    <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
-                </div>
-                <button type="submit" class="btn btn-default">Tallenna</button>
-            </form>
-        
+<br>
+
+<div class="form-horizontal">
+
+    <form class="form-control-static" role="form">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Käyttäjänimi</label>
+            <div class="col-sm-10">
+                <p class="form-control-static"><?php echo htmlspecialchars($data->kayttajanimi); ?></p>
+            </div>
         </div>
-    </body>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Nimi</label>
+            <div class="col-sm-10">
+                <p class="form-control-static"><?php echo htmlspecialchars($data->hlotiedot->getNimi()); ?></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Irc</label>
+            <div class="col-sm-10">
+                <p class="form-control-static"><?php echo htmlspecialchars($data->hlotiedot->getIrc()); ?></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10">
+                <p class="form-control-static"><?php echo htmlspecialchars($data->hlotiedot->getEmail()); ?></p>
+            </div>
+        </div>
+
+        <?php if (isset($_SESSION['fuksi'])): ?>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Pisteet yhteensä</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static"><?php echo htmlspecialchars($data->pisteet); ?></p>
+                </div>
+            </div>
+        <?php endif ?>
+    </form>
+</div>

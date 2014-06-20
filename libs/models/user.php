@@ -9,12 +9,13 @@ class user {
     private $tunnus;
     private $salasana;
     private $salasana2;
+    private $fuksitunnus;
+    private $tutortunnus;
 
     public function __construct($tunnus, $salasana, $salasana2) {
         $this->tunnus = $tunnus;
         $this->salasana = $salasana;
         $this->salasana2 = $salasana2;
-        $this->id = '';
     }
 
     public function getId() {
@@ -33,6 +34,14 @@ class user {
         return $this->salasana2;
     }
 
+    public function getFuksitunnus() {
+        return $this->fuksitunnus;
+    }
+
+    public function getTutortunnus() {
+        return $this->tutortunnus;
+    }
+
     public function setId($id) {
         $this->id = $id;
     }
@@ -49,8 +58,16 @@ class user {
         $this->salasana2 = $salasana2;
     }
 
+    public function setFuksitunnus($ftunnus) {
+        $this->fuksitunnus = $ftunnus;
+    }
+
+    public function setTutortunnus($ttunnus) {
+        $this->tutortunnus = $ttunnus;
+    }
+
     public static function etsiKayttajaTunnuksilla($kayttaja, $salasana) {
-        $sql = "SELECT id, tunnus, password from users where tunnus = ? AND password = ? LIMIT 1";
+        $sql = "SELECT * from users where tunnus = ? AND password = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($kayttaja, $salasana));
 
@@ -60,11 +77,12 @@ class user {
         } else {
             $kayttaja = new user($tulos->tunnus, $tulos->password, $tulos->password);
             $kayttaja->setId($tulos->id);
-
-
+            $kayttaja->setFuksitunnus($tulos->fuksitunnus);
+            $kayttaja->setTutortunnus($tulos->tutortunnus);
             return $kayttaja;
         }
     }
+
 
     public function lisaaKantaan($foreignid) {
         $sql = "INSERT INTO users(id, tunnus, password, fuksitunnus) VALUES(nextval('user_id_seq'),?,?,?) RETURNING id";

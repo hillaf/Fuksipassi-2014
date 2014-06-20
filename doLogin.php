@@ -20,8 +20,11 @@
       $_SESSION['kirjautunut'] = $kirjautuja->getTunnus();
       $_SESSION['kirjautuneenID'] = $kirjautuja->getId();
       
-      if(!tutor::onkoTutor($kirjautuja->getId())){
-          $_SESSION['tutor'] = $kirjautuja->getId();
+      
+      if(tutor::onkoTutor($kirjautuja->getTutortunnus())){
+          $_SESSION['tutor'] = $kirjautuja->getTutortunnus();
+      } else {
+          $_SESSION['fuksi'] = $kirjautuja->getFuksitunnus();
       }
       
       header('Location: index.php');

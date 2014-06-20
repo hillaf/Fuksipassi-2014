@@ -68,5 +68,19 @@ class osallistuminen {
         return $this->id;
     }
     
+        public static function onkoOsallistunut($fuksiID, $tapahtumaID) {
+
+        $sql = "SELECT otunnus FROM osallistuminen WHERE fuksitunnus = ? and tapahtumatunnus = ? LIMIT 1";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($fuksiID, $tapahtumaID));
+
+        $tulos = $kysely->fetchObject();
+        
+        if ($tulos==null){
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 }

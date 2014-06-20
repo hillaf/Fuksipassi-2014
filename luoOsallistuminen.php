@@ -8,14 +8,13 @@ require_once 'libs/models/event.php';
 require_once 'libs/models/osallistuminen.php';
 
 $tapahtumaID = $_POST['id'];
-$fuksiID = $_SESSION['kirjautuneenID'];
+$fuksiID = $_SESSION['fuksi'];
 $tapahtumaLista = event::etsiTapahtuma($tapahtumaID);
 $tapahtuma = $tapahtumaLista[0];
 $pisteet = $tapahtuma->getPisteet();
 
 $uusiOsallistuminen = new osallistuminen($tapahtumaID, $fuksiID, $pisteet);
 $uusiOsallistuminen->lisaaAlustavaOsallistuminenKantaan();
-
 
 header("Location: tapahtuma.php?id=".$tapahtumaID);
 $_SESSION['ilmoitus'] = "Sinut on merkitty osallistuneeksi tapahtumaan.";
