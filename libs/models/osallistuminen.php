@@ -150,4 +150,19 @@ class osallistuminen {
         return $tulokset;
     }
     
+    public static function etsiFuksinOsallistututTapahtumat($fuksiid) {
+
+        $sql = "SELECT tapahtumatunnus FROM osallistuminen WHERE fuksitunnus = ?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($fuksiid));
+        
+        $tulokset = array();
+
+        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
+            $tulokset[] = $tulos->tapahtumatunnus;
+        }
+
+        return $tulokset;
+    }
+    
 }
