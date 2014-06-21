@@ -1,14 +1,6 @@
 <h1>Fuksit</h1>
 
 <br>
-<div class="btn-group" id="lisays">
-    <div class="form-group">
-        <form class="form-group" role="form" action="fuksilisaysform.php">
-            <button type="submit" class="btn btn-default">Lisää fuksi</button>
-        </form>
-    </div>
-</div>
-<br>
 
 
 <table class="table table-hover">

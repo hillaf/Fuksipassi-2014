@@ -26,21 +26,3 @@
         </div>
     </form>
 </div>
-
-<br>
-
-<?php if (isset($_SESSION['tutor'])): ?>
-    <div class="form-group">
-        <form class="form-group" role="form" method="POST" action="fuksinpoisto.php">
-            <input type="hidden" name="id" value="<?php echo $data->naytettavaFuksi->getId(); ?>">
-            <button type="submit" class="btn btn-default">Poista fuksi</button>
-        </form>
-    </div>
-    <div class="form-group">
-        <form class="form-group" role="form" method="POST" action="fuksinmuokkausform.php">
-            <input type="hidden" name="id" value="<?php echo $data->naytettavaFuksi->getId(); ?>">
-            <button type="submit" class="btn btn-default">Muokkaa fuksin tietoja</button>
-        </form>
-    </div>
-
-<?php endif; ?>

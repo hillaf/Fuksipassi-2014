@@ -14,8 +14,7 @@ require_once 'libs/tietokantayhteys.php';
 
 
 if (isset($_SESSION['fuksi'])) {
-    $fuksilista = fuksi::etsiFuksi($_SESSION['fuksi']);
-    $hlo = $fuksilista[0];
+    $hlo = fuksi::etsiFuksi($_SESSION['fuksi']);
     $tapahtumaIDLista = fuksi::etsiFuksinTapahtumat($_SESSION['fuksi']);
     $tapahtumaLista = array();
     

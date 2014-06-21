@@ -67,23 +67,17 @@ class fuksi {
 
     public static function etsiFuksi($id) {
 
-        $param = array();
-        $id = (int) $id;
-        $param[] = $id;
+        
         $sql = "SELECT fuksitunnus, nimi, ircnick, email FROM fuksi WHERE fuksitunnus = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
-        $kysely->execute($param);
+        $kysely->execute(array($id));
 
-        $tulokset = array();
 
-        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
-            $fuksi = new fuksi($tulos->nimi, $tulos->ircnick, $tulos->email);
-            $fuksi->setId($tulos->fuksitunnus);
+        $tulos = $kysely->fetchObject();
+        $fuksi = new fuksi($tulos->nimi, $tulos->ircnick, $tulos->email);
+        $fuksi->setId($tulos->fuksitunnus);
 
-            $tulokset[] = $fuksi;
-        }
-
-        return $tulokset;
+        return $fuksi;
     }
 
     public function poistaFuksi($id) {
