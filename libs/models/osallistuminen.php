@@ -78,10 +78,10 @@ class osallistuminen {
     }
     
     public function lisaaMerkintaKantaan() {
-        $sql = "INSERT INTO osallistuminen(otunnus, fuksitunnus, pisteet, tutortunnus) VALUES(nextval('osallistuminen_id_seq'),?,?,?) RETURNING otunnus";
+        $sql = "INSERT INTO osallistuminen(otunnus, fuksitunnus, pisteet, tutortunnus, kommentti) VALUES(nextval('osallistuminen_id_seq'),?,?,?,?) RETURNING otunnus";
         $kysely = getTietokantayhteys()->prepare($sql);
 
-        $ok = $kysely->execute(array($this->getFuksiid(), $this->getPisteet(), $this->getTutoriid()));
+        $ok = $kysely->execute(array($this->getFuksiid(), $this->getPisteet(), $this->getTutoriid(), $this->getKuvaus()));
         if ($ok) {
             //Haetaan RETURNING-määreen palauttama id.
             //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!
@@ -179,7 +179,7 @@ class osallistuminen {
 
     public static function etsiFuksinOsallistututTapahtumat($fuksiid) {
 
-        $sql = "SELECT tapahtumatunnus FROM osallistuminen WHERE fuksitunnus = ? and kuvaus is null";
+        $sql = "SELECT tapahtumatunnus FROM osallistuminen WHERE fuksitunnus = ? and kommentti is null";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($fuksiid));
 

@@ -12,7 +12,7 @@ if ($tapahtuma->onkoKelvollinen()) {
     //Asetetaan istuntoon ilmoitus siitä, että tapahtuma on päivitetty.
     $_SESSION['ilmoitus'] = "Tapahtuman tiedot päivitetty onnistuneesti.";
 
-    onkoKirjautunut('tapahtuma', array('naytettavatapahtuma' => $tapahtuma));
+    header("Location: tapahtuma.php?id=".$id);
     
 } else {
 

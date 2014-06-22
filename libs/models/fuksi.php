@@ -75,7 +75,7 @@ class fuksi {
 
         $tulos = $kysely->fetchObject();
         $fuksi = new fuksi($tulos->nimi, $tulos->ircnick, $tulos->email);
-        $fuksi->setId($id);
+        $fuksi->setId($tulos->fuksitunnus);
 
         return $fuksi;
     }

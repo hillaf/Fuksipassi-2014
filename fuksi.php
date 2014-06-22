@@ -9,8 +9,7 @@ $osallistututTapahtumaIDt = osallistuminen::etsiFuksinOsallistututTapahtumat($id
 $osallistututTapahtumat = array();
 
 foreach ($osallistututTapahtumaIDt as $tapahtumaID) {
-    $tapahtumapaskile = event::etsiTapahtuma($tapahtumaID);
-    $osallistututTapahtumat[] = $tapahtumapaskile[0];
+    $osallistututTapahtumat[] = event::etsiTapahtuma($tapahtumaID);
 }
 
 
