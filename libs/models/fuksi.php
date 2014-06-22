@@ -116,7 +116,7 @@ class fuksi {
 
     public static function etsiFuksinTapahtumat($fuksiID) {
 
-        $sql = "SELECT tapahtumatunnus FROM osallistuminen WHERE fuksitunnus = ?";
+        $sql = "SELECT tapahtumatunnus FROM osallistuminen WHERE fuksitunnus = ? and tapahtumatunnus is not null";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($fuksiID));
 

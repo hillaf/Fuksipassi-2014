@@ -9,7 +9,7 @@
     <body>
         <div class="container">
             <ul class="nav nav-pills">
-                <li class="active"><a href="index.php">Etusivu</a></li>
+                <li><a href="index.php">Etusivu</a></li>
                 <li><a href="my.php">Omat tiedot</a></li>
                 <li><a href="events.php">Tapahtumat</a></li>
                 <li><a href="fuksit.php">Fuksit</a></li>

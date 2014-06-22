@@ -43,12 +43,23 @@
             </form>
             <br>
 
+            <!--fuksin merkinnät-->
+
             <?php foreach ($data->fuksinMerkinnat as $merkinta): ?>
                 <br>
+                <br>
+                <form class="form-group" role="form" method="POST" action="merkinnanPoisto.php">
+                    <input type="hidden" name="id" value="<?php echo $merkinta->getId(); ?>">
+                    <input type="hidden" name="fuksi" value="<?php echo $data->naytettavaFuksi->getId(); ?>">
+                    <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+                </form>
                 <blockquote>
-                    <p><?php echo htmlspecialchars($merkinta->getKuvaus()) ?>&nbsp;<span class="badge"><?php echo $merkinta->getPisteet() ?></span></p>
+                    <p><?php echo htmlspecialchars($merkinta->getKuvaus()) ?>&nbsp;
+                        <span class="badge"><?php echo $merkinta->getPisteet() ?></span>
+                    </p>
                     <footer><?php echo htmlspecialchars($merkinta->getTutoriid()) ?></cite></footer>
-                </blockquote>
+                </blockquote> 
+
 
 
             <?php endforeach ?>

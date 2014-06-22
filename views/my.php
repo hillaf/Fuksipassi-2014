@@ -49,15 +49,16 @@
             </form>
         </div>
 
-        <?php foreach ($data->fuksinMerkinnat as $merkinta): ?>
-            <br>
-            <blockquote>
-                <p><?php echo htmlspecialchars($merkinta->getKuvaus()) ?></p>
-                <footer><?php echo htmlspecialchars($merkinta->getTutoriid()) ?></cite></footer>
-            </blockquote>
+        <?php if (isset($_SESSION['fuksi'])): ?>
+            <?php foreach ($data->fuksinMerkinnat as $merkinta): ?>
+                <br>
+                <blockquote>
+                    <p><?php echo htmlspecialchars($merkinta->getKuvaus()) ?></p>
+                    <footer><?php echo htmlspecialchars($merkinta->getTutoriid()) ?></cite></footer>
+                </blockquote>
 
-        <?php endforeach ?>
-
+            <?php endforeach ?>
+        <?php endif ?>
 
     </div>
 

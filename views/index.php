@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-md-6">
         <h1>Hei, <?php echo $_SESSION['kirjautunut']; ?></h1>
+        <br>
         <p>Olet kirjautunut sisään.</p>
         <p>
             Fuksipassi-sovelluksessa fuksit voivat merkitä osallistuneensa tapahtumiin ja kerätä näin pisteitä.

@@ -109,6 +109,13 @@ class osallistuminen {
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($this->id));
     }
+    
+    public static function poistaOsallistuminenTunnuksella($otunnus) {
+
+        $sql = "DELETE FROM osallistuminen WHERE otunnus = ?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($otunnus));
+    }
 
     public static function etsiOsallistuminen($fuksiID, $tapahtumaID) {
 
