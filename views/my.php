@@ -39,7 +39,7 @@
 
                 <?php if (isset($_SESSION['fuksi'])): ?>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Pisteitä tapahtumista</label>
+                        <label class="col-sm-2 control-label">Vahvistetut pisteet</label>
                         <div class="col-sm-10">
                             <p class="form-control-static"><?php echo htmlspecialchars($data->pisteet); ?></p>
                         </div>

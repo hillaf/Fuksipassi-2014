@@ -130,7 +130,7 @@ class fuksi {
     }
 
     public function getPisteet() {
-        $sql = "SELECT SUM(pisteet) FROM osallistuminen WHERE fuksitunnus = ?";
+        $sql = "SELECT SUM(pisteet) FROM osallistuminen WHERE fuksitunnus = ? and tutortunnus is not null";
         $kysely = getTietokantayhteys()->prepare($sql);
 
         $ok = $kysely->execute(array($this->getId()));
@@ -144,7 +144,7 @@ class fuksi {
     }
 
     public function getTapahtumaPisteet() {
-        $sql = "SELECT SUM(pisteet) FROM osallistuminen WHERE fuksitunnus = ? and tapahtumatunnus is not null";
+        $sql = "SELECT SUM(pisteet) FROM osallistuminen WHERE fuksitunnus = ? and tapahtumatunnus is not null and tutortunnus is not null";
         $kysely = getTietokantayhteys()->prepare($sql);
 
         $ok = $kysely->execute(array($this->getId()));
