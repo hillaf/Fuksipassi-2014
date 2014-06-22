@@ -35,8 +35,8 @@ class osallistuminen {
     public function getTutoriid() {
         return $this->tutoriid;
     }
-    
-    public function getKuvaus(){
+
+    public function getKuvaus() {
         return $this->kuvaus;
     }
 
@@ -59,8 +59,8 @@ class osallistuminen {
     public function setTutoriid($tutoriid) {
         $this->tutoriid = $tutoriid;
     }
-    
-    public function setKuvaus($kuvaus){
+
+    public function setKuvaus($kuvaus) {
         $this->kuvaus = $kuvaus;
     }
 
@@ -76,7 +76,7 @@ class osallistuminen {
         }
         return $this->id;
     }
-    
+
     public function lisaaMerkintaKantaan() {
         $sql = "INSERT INTO osallistuminen(otunnus, fuksitunnus, pisteet, tutortunnus, kommentti) VALUES(nextval('osallistuminen_id_seq'),?,?,?,?) RETURNING otunnus";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -191,7 +191,7 @@ class osallistuminen {
 
         return $tulokset;
     }
-    
+
     public static function etsiFuksinMerkinnat($fuksiid) {
 
         $sql = "SELECT * FROM osallistuminen WHERE fuksitunnus = ? and kommentti is not null";
@@ -210,7 +210,7 @@ class osallistuminen {
 
         return $tulokset;
     }
-    
+
     public function onkoKelvollinen() {
 
 
@@ -219,7 +219,7 @@ class osallistuminen {
         } else {
             unset($this->virheet['Pisteetlukuna']);
         }
-        
+
         if (strlen(trim($this->kuvaus)) > 500) {
             $this->virheet['Kuvaus'] = "Kuvaus ei saa olla yli 50 merkkiä pitkä.";
         } else if (trim($this->kuvaus) == '') {
@@ -230,11 +230,9 @@ class osallistuminen {
 
         return empty($this->virheet);
     }
-    
-    public function getVirheet(){
+
+    public function getVirheet() {
         return $this->virheet;
     }
-
-    
 
 }

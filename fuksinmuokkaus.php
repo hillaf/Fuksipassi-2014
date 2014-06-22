@@ -11,14 +11,14 @@ if ($fuksi->onkoKelvollinen()) {
 
     //Asetetaan istuntoon ilmoitus siitä, että fuksi on päivitetty.
     $_SESSION['ilmoitus'] = "Fuksin tiedot päivitetty onnistuneesti.";
-    
-    onkoKirjautunut('fuksi', array('naytettavaFuksi'=>$fuksi));
+
+    onkoKirjautunut('fuksi', array('naytettavaFuksi' => $fuksi));
 } else {
-    
+
     unset($_SESSION['ilmoitus']);
     $virheet = $fuksi->getVirheet();
- 
+
     onkoKirjautunut('fuksinmuokkausform', array(
-        'virheet'=>$virheet, 
-        'muokattavafuksi'=>$fuksi));
+        'virheet' => $virheet,
+        'muokattavafuksi' => $fuksi));
 }

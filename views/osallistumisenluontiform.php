@@ -3,11 +3,11 @@
 <div class="lisays">
 
     <form role="form" action="osallistumisenluonti.php" method="POST">
-        
+
         <div class="form-group">
             <input type="hidden" class="form-control" name="fuksi" id="fuksi" value="<?php echo htmlspecialchars($data->fuksi->getId()); ?>">
             <input type="hidden" class="form-control" name="tutortunnus" id="tutortunnus" value="<?php echo htmlspecialchars($_SESSION['tutor']); ?>">
-            
+
             <label for="pisteet">Pisteet</label>
             <input type="text" class="form-control" name="pisteet" id="pisteet" placeholder="Pisteet" value="<?php echo htmlspecialchars($data->pisteet); ?>">
         </div>

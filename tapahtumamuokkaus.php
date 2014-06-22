@@ -12,8 +12,7 @@ if ($tapahtuma->onkoKelvollinen()) {
     //Asetetaan istuntoon ilmoitus siitä, että tapahtuma on päivitetty.
     $_SESSION['ilmoitus'] = "Tapahtuman tiedot päivitetty onnistuneesti.";
 
-    header("Location: tapahtuma.php?id=".$id);
-    
+    header("Location: tapahtuma.php?id=" . $id);
 } else {
 
     unset($_SESSION['ilmoitus']);

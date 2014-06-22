@@ -14,22 +14,22 @@ if (isset($_SESSION['fuksi'])) {
         'onkoOsallistunut' => $onkoOsallistunut
     ));
 } else {
-    
+
     // näytetään tutorille kaikki osallistuneet fuksit
-    
+
     $osallistumiset = osallistuminen::etsiOsallistumisetTapahtumasta($naytettavatapahtuma->getId());
     $vahvistetutfuksit = array();
     $vahvistamattomatfuksit = array();
-    
+
     foreach ($osallistumiset as $osallistuminen) {
-        
-        if ($osallistuminen->getTutoriid() != null){
+
+        if ($osallistuminen->getTutoriid() != null) {
             $vahvistetutfuksit[] = fuksi::etsiFuksi($osallistuminen->getFuksiid());
         } else {
             $vahvistamattomatfuksit[] = fuksi::etsiFuksi($osallistuminen->getFuksiid());
         }
     }
-    
+
     onkoKirjautunut('tapahtuma', array(
         'naytettavatapahtuma' => $naytettavatapahtuma,
         'vahvistetutfuksit' => $vahvistetutfuksit,

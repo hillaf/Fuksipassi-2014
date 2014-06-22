@@ -130,7 +130,7 @@
 <div class="row">
 
     <div class="col-md-6">
-        
+
         <!--tässä fuksin osallistuminen/peruminen-->
 
         <br>
@@ -164,7 +164,7 @@
 
         <?php endif ?>
 
-        
+
         <!--tutorille mahdollisuus muokata tapahtumaa tai poistaa se-->
 
         <?php if (isset($_SESSION['tutor'])): ?>

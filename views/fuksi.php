@@ -82,7 +82,7 @@
                     <?php foreach ($data->osallistututTapahtumat as $event): ?>
 
                         <tr onclick="window.location.href = 'tapahtuma.php?id
-                                                    =<?php echo $event->getId(); ?>';">
+                                                =<?php echo $event->getId(); ?>';">
                             <td><?php echo htmlspecialchars($event->getNimi()); ?></td>
                             <td><?php echo htmlspecialchars($event->getPvm()); ?></td>
                             <td><?php echo htmlspecialchars($event->getPisteet()); ?></td>

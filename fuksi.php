@@ -13,7 +13,7 @@ foreach ($osallistututTapahtumaIDt as $tapahtumaID) {
     $osallistututTapahtumat[] = event::etsiTapahtuma($tapahtumaID);
 }
 
-foreach($fuksinMerkinnat as $merkinta){
+foreach ($fuksinMerkinnat as $merkinta) {
     $tutor = tutor::etsiTutor($merkinta->getTutoriid());
     $merkinta->setTutoriid($tutor->getNimi());
 }

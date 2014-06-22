@@ -1,3 +1,4 @@
 <?php
-  require_once 'libs/common.php';
-  naytaNakyma('login');
+
+require_once 'libs/common.php';
+naytaNakyma('login');

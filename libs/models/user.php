@@ -82,7 +82,6 @@ class user {
         }
     }
 
-
     public function lisaaKantaan($foreignid) {
         $sql = "INSERT INTO users(id, tunnus, password, fuksitunnus) VALUES(nextval('user_id_seq'),?,?,?) RETURNING id";
         $kysely = getTietokantayhteys()->prepare($sql);

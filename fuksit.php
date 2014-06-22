@@ -2,11 +2,9 @@
 
 require 'libs/common.php';
 
-
-
 if (isset($_SESSION['tutor'])) {
     $fuksit = fuksi::etsiKaikkiFuksit();
-    
+
     onkoKirjautunut('fuksit', array(
         'fuksit' => $fuksit
     ));

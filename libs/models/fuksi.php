@@ -67,7 +67,7 @@ class fuksi {
 
     public static function etsiFuksi($id) {
 
-        
+
         $sql = "SELECT fuksitunnus, nimi, ircnick, email FROM fuksi WHERE fuksitunnus = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($id));
@@ -115,7 +115,7 @@ class fuksi {
     // palauttaa listana niiden tapahtumien id:t, joihin fuksi on osallistunut
 
     public static function etsiFuksinTapahtumat($fuksiID) {
-        
+
         $sql = "SELECT tapahtumatunnus FROM osallistuminen WHERE fuksitunnus = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($fuksiID));
@@ -142,7 +142,7 @@ class fuksi {
 
         return $tulos;
     }
-    
+
     public function getTapahtumaPisteet() {
         $sql = "SELECT SUM(pisteet) FROM osallistuminen WHERE fuksitunnus = ? and tapahtumatunnus is not null";
         $kysely = getTietokantayhteys()->prepare($sql);

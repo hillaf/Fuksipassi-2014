@@ -13,7 +13,7 @@
                 <br>
                 Fuksit eivät näe omia kokonaispisteitään tai tekemistänne merkinnöistä ansaitsemiaan pisteitä.
                 He näkevät vain tapahtumista kertyneet pisteet. Voitte lisätä ja muokata tapahtumia.
-                
+
                 Jos jotain menee rikki tai pitää parannella tai haluatte antaa palautetta: hihihi@cs.helsinki.fi
             <?php endif ?>
             <?php if (isset($_SESSION['fuksi'])): ?>

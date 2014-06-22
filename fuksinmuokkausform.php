@@ -10,8 +10,8 @@ $muokattavaFuksi = $muokattavaFuksiLista[0];
 
 if (isset($_SESSION['tutor'])) {
     onkoKirjautunut('fuksinmuokkausform', array(
-    'muokattavafuksi' => $muokattavaFuksi
-));
+        'muokattavafuksi' => $muokattavaFuksi
+    ));
 } else {
     onkoKirjautunut('index', array(
         'virhe' => "Vain tutoreilla on oikeus tarkastella muiden fuksien tietoja."

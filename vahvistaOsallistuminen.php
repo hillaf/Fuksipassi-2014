@@ -7,5 +7,5 @@ $paivitettavaOsallistuminen = osallistuminen::etsiOsallistuminen($_POST['fuksiid
 $paivitettavaOsallistuminen->vahvistaOsallistuminen($_SESSION['tutor']);
 
 
-header("Location: tapahtuma.php?id=".$tapahtumaid);
+header("Location: tapahtuma.php?id=" . $tapahtumaid);
 $_SESSION['ilmoitus'] = "Osallistuminen vahvistettu onnistuneesti.";

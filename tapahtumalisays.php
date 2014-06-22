@@ -13,7 +13,7 @@ if ($uusitapahtuma->onkoKelvollinen()) {
     //Asetetaan istuntoon ilmoitus siitä, että fuksi on lisätty.
     $_SESSION['ilmoitus'] = "Uusi tapahtuma lisätty onnistuneesti.";
 } else {
-    
+
     unset($_SESSION['ilmoitus']);
     $virheet = $uusitapahtuma->getVirheet();
     $tapahtumat = event::etsiKaikkiTapahtumat();

@@ -11,5 +11,5 @@ $uusiOsallistuminen = new osallistuminen($fuksiID, $pisteet);
 $uusiOsallistuminen->setTapahtumaid($tapahtumaID);
 $uusiOsallistuminen->lisaaAlustavaOsallistuminenKantaan();
 
-header("Location: tapahtuma.php?id=".$tapahtumaID);
+header("Location: tapahtuma.php?id=" . $tapahtumaID);
 $_SESSION['ilmoitus'] = "Sinut on merkitty osallistuneeksi tapahtumaan.";
