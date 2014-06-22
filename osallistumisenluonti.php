@@ -1,9 +1,6 @@
 <?php
 
 require_once 'libs/common.php';
-require_once 'libs/models/osallistuminen.php';
-require_once 'libs/models/fuksi.php';
-require_once 'libs/tietokantayhteys.php';
 
 $osallistuminen = new osallistuminen($_POST['fuksi'], $_POST['pisteet']);
 $osallistuminen->setTutoriid($_SESSION['tutor']);

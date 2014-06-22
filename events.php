@@ -1,7 +1,5 @@
 <?php
-require 'libs/common.php';
-require 'libs/models/event.php';
-require 'libs/tietokantayhteys.php';
+require_once 'libs/common.php';
 
 $tapahtumat = event::etsiKaikkiTapahtumat();
 

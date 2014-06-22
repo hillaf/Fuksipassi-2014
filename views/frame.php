@@ -22,10 +22,6 @@
 
             <!--virheilmoitukset, siivoan myöhemmin!-->
 
-            <?php if (!empty($data->virhe)): ?>
-                <br>
-                <div class="alert alert-danger"><?php echo $data->virhe; ?></div>
-            <?php endif; ?>
             <?php if (!empty($data->virheet)): ?>
                 <br>
                 <?php foreach ($data->virheet as $virhe): ?>

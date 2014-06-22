@@ -1,6 +1,6 @@
 <h1>Muokkaa tietoja: <?php echo htmlspecialchars($data->muokattavatapahtuma->getNimi()); ?></h1>
 <br>
-<div class="lisays">
+<div class="form-group">
 
     <form role="form" action="tapahtumamuokkaus.php" method="POST">
         <div class="form-group">

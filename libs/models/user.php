@@ -1,10 +1,8 @@
 <?php
 
-require_once 'libs/tietokantayhteys.php';
-
 class user {
 
-    private $virheet = array();
+    private $virheet;
     private $id;
     private $tunnus;
     private $salasana;
@@ -16,6 +14,7 @@ class user {
         $this->tunnus = $tunnus;
         $this->salasana = $salasana;
         $this->salasana2 = $salasana2;
+        $this->virheet = array();
     }
 
     public function getId() {

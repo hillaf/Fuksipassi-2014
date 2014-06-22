@@ -2,6 +2,7 @@
 
 class event {
 
+    private $virheet;
     private $id;
     private $nimi;
     private $paikka;
@@ -19,6 +20,7 @@ class event {
         $this->linkki = $linkki;
         $this->pisteet = $pisteet;
         $this->kuvaus = $kuvaus;
+        $this->virheet = array();
     }
 
     public function getId() {
@@ -96,7 +98,7 @@ class event {
         foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
             $event = new event($tulos->nimi, $tulos->paikka, $tulos->pvm, $tulos->aika, $tulos->linkki, $tulos->pisteet, $tulos->kuvaus);
             $event->setId($tulos->tapahtumatunnus);
-            
+
             $tulokset[] = $event;
         }
 
@@ -105,26 +107,17 @@ class event {
 
     public static function etsiTapahtuma($id) {
 
-        $param = array();
-        $id = (int) $id;
-        $param[] = $id;
         $sql = "SELECT tapahtumatunnus, nimi, paikka, pvm, aika, linkki, pisteet, kuvaus FROM tapahtuma WHERE tapahtumatunnus = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
-        $kysely->execute($param);
+        $kysely->execute(array($id));
 
-        $tulokset = array();
+        $tulos = $kysely->fetchObject();
 
-        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
-            $tapahtuma = new event($tulos->nimi, $tulos->paikka, $tulos->pvm, $tulos->aika, $tulos->linkki, $tulos->pisteet, $tulos->kuvaus);
-            $tapahtuma->setId($tulos->tapahtumatunnus);
-            
-            $tulokset[] = $tapahtuma;
-        }
+        $tapahtuma = new event($tulos->nimi, $tulos->paikka, $tulos->pvm, $tulos->aika, $tulos->linkki, $tulos->pisteet, $tulos->kuvaus);
+        $tapahtuma->setId($tulos->tapahtumatunnus);
 
-        return $tulokset;
+        return $tapahtuma;
     }
-    
- 
 
     public function onkoKelvollinen() {
 
@@ -135,20 +128,20 @@ class event {
         $this->onkoLiianPitkaTaiTyhja($this->linkki, 'Linkki');
         $this->onkoLiianPitkaTaiTyhja($this->pisteet, 'Pisteet');
         $this->onkoKuvausLiianPitkaTaiTyhja($this->kuvaus, 'Kuvaus');
-        
-        if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $this->pvm)){
+
+        if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $this->pvm)) {
             $this->virheet['Pvmmuoto'] = "Annanthan päivämäärän muodossa yyyy-mm-dd.";
         } else {
             unset($this->virheet['Pvmmuoto']);
         }
-        
-        if (!preg_match("/(\d{2}):(\d{2})/", $this->aika)){
+
+        if (!preg_match("/(\d{2}):(\d{2})/", $this->aika)) {
             $this->virheet['Aikamuoto'] = "Annanthan ajan muodossa hh:mm.";
         } else {
             unset($this->virheet['Aikamuoto']);
         }
 
-        
+
         if (!is_numeric($this->pisteet)) {
             $this->virheet['Pisteetlukuna'] = "Pisteet tulee ilmoittaa kokonaislukuna.";
         } else {
@@ -167,7 +160,7 @@ class event {
             unset($this->virheet[$tyyppi]);
         }
     }
-    
+
     function onkoKuvausLiianPitkaTaiTyhja($param, $tyyppi) {
         if (strlen(trim($param)) > 500) {
             $this->virheet[$tyyppi] = "$tyyppi ei saa olla yli 50 merkkiä pitkä.";
@@ -190,16 +183,13 @@ class event {
         }
         return $this->id;
     }
-    
-        public function poistaTapahtuma($id) {
-        $param = array();
-        $id = (int) $id;
-        $param[] = $id;
+
+    public function poistaTapahtuma($id) {
         $sql = "DELETE FROM tapahtuma WHERE tapahtumatunnus = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
-        $kysely->execute($param);
+        $kysely->execute(array($id));
     }
-    
+
     public function paivitaKantaan() {
         $sql = "UPDATE tapahtuma SET nimi = ?, paikka = ?, pvm = ?, aika = ?, linkki = ?, pisteet = ?, kuvaus = ? WHERE tapahtumatunnus = ? RETURNING tapahtumatunnus";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -213,8 +203,8 @@ class event {
         return $ok;
     }
 
-    
-    public function getVirheet(){
+    public function getVirheet() {
         return $this->virheet;
     }
+
 }

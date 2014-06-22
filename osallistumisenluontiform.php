@@ -1,8 +1,6 @@
 <?php
 
 require_once 'libs/common.php';
-require_once 'libs/models/fuksi.php';
-require_once 'libs/tietokantayhteys.php';
 
 if (isset($_SESSION['tutor'])) {
 

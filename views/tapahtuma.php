@@ -130,8 +130,8 @@
 <div class="row">
 
     <div class="col-md-6">
-        <!--Hässäkkä, jossa valitaan, näytetäänkö fuksin vai tutorin tietoja. Nää on eri taulussa, siksi tällaista paskaa.
-        Jatkossa hirveän kiva että voidaan näyttää eri juttuja eri käyttäjille, mutta ähh.-->
+        
+        <!--tässä fuksin osallistuminen/peruminen-->
 
         <br>
 
@@ -164,6 +164,8 @@
 
         <?php endif ?>
 
+        
+        <!--tutorille mahdollisuus muokata tapahtumaa tai poistaa se-->
 
         <?php if (isset($_SESSION['tutor'])): ?>
 

@@ -18,6 +18,8 @@
         </p>
     </div>
 
+    <!--näytetään tutoreille lista tapahtumista, joissa on vahvistamattomia osallistumisia-->
+    
     <?php if (isset($_SESSION['tutor']) && !empty($data->vahvistamattomatTapahtumat)): ?>
         <div class="col-md-6">
 
@@ -47,6 +49,8 @@
 
         </div>
 
+    <!--jos vahvistamattomia tapahtumia ei ole-->
+    
     <?php endif ?>
     <?php if (isset($_SESSION['tutor']) && empty($data->vahvistamattomatTapahtumat)): ?>
         <br>

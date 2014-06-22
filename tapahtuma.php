@@ -1,16 +1,10 @@
 <?php
 
 require_once 'libs/common.php';
-require_once 'libs/models/event.php';
-require_once 'libs/models/fuksi.php';
-require_once 'libs/tietokantayhteys.php';
-require_once 'libs/models/osallistuminen.php';
 
 $id = (int) $_GET['id'];
 
-
-$naytettavaTapahtumaLista = event::etsiTapahtuma($id);
-$naytettavatapahtuma = $naytettavaTapahtumaLista[0];
+$naytettavatapahtuma = event::etsiTapahtuma($id);
 
 if (isset($_SESSION['fuksi'])) {
     $onkoOsallistunut = osallistuminen::onkoOsallistunut($_SESSION['fuksi'], $id);
@@ -20,6 +14,8 @@ if (isset($_SESSION['fuksi'])) {
         'onkoOsallistunut' => $onkoOsallistunut
     ));
 } else {
+    
+    // näytetään tutorille kaikki osallistuneet fuksit
     
     $osallistumiset = osallistuminen::etsiOsallistumisetTapahtumasta($naytettavatapahtuma->getId());
     $vahvistetutfuksit = array();

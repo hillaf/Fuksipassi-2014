@@ -1,9 +1,6 @@
 <?php
 
-require 'libs/common.php';
-require 'libs/models/fuksi.php';
-require 'libs/models/user.php';
-require_once 'libs/tietokantayhteys.php';
+require_once 'libs/common.php';
 
 $uusifuksi = new fuksi($_POST['nimi'], $_POST['ircnick'], $_POST['email']);
 $uusiuser = new user($_POST['kayttajatunnus'], $_POST['salasana'], $_POST['salasana2']);

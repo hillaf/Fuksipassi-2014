@@ -1,17 +1,19 @@
 <?php
 
 require 'libs/common.php';
-require 'libs/models/fuksi.php';
-require 'libs/tietokantayhteys.php';
 
 $fuksit = fuksi::etsiKaikkiFuksit();
 
-if (isset($_SESSION['tutor'])){
+if (isset($_SESSION['tutor'])) {
     onkoKirjautunut('fuksit', array('fuksit' => $fuksit));
-} else {
-   
+} else if (isset($_SESSION['fuksi'])){
+    
+    $virheet = array();
+    $virheet[] = "Vain tutoreilla on oikeus tarkastella muiden fuksien tietoja.";
     onkoKirjautunut('index', array(
-        'virhe' => "Vain tutoreilla on oikeus tarkastella muiden fuksien tietoja."
+        'virheet' => $virheet 
     ));
+} else {
+    onkoKirjautunut('index');
 }
 

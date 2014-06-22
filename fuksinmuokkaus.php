@@ -1,8 +1,6 @@
 <?php
 
 require 'libs/common.php';
-require 'libs/models/fuksi.php';
-require 'libs/tietokantayhteys.php';
 
 
 $fuksi = new fuksi($_POST['nimi'], $_POST['ircnick'], $_POST['email']);

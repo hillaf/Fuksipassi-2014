@@ -1,5 +1,7 @@
 <h1>Tapahtumat</h1>
 
+<!--näytetään tutorille mahdollisuus lisätä tapahtumia-->
+
 <?php if (isset($_SESSION['tutor'])): ?>
     <br>
     <div class="btn-group" id="lisays">
@@ -14,6 +16,7 @@
 
 <br>
 
+<!--listataan kaikki tapahtumat-->
 
 <table class="table table-hover">
     <thead>

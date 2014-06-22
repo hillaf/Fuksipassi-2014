@@ -69,7 +69,7 @@
 
         <?php endif ?>
 
-        <!--mahdollisuus lisätä fuksille uusia merkintöjä-->
+        <!-- mahdollisuus lisätä fuksille uusia merkintöjä-->
 
         <br>
         <div class="form-group">

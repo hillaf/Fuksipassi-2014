@@ -2,7 +2,7 @@
 
 class fuksi {
 
-    private $virheet = array();
+    private $virheet;
     private $id;
     private $nimi;
     private $irc;
@@ -12,7 +12,7 @@ class fuksi {
         $this->nimi = $nimi;
         $this->irc = $irc;
         $this->email = $email;
-        $this->id = '';
+        $this->virheet = array();
     }
 
     public function getId() {
@@ -81,12 +81,9 @@ class fuksi {
     }
 
     public function poistaFuksi($id) {
-        $param = array();
-        $id = (int) $id;
-        $param[] = $id;
         $sql = "DELETE FROM fuksi WHERE fuksitunnus = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
-        $kysely->execute($param);
+        $kysely->execute(array($id));
     }
 
     public function lisaaKantaan() {
@@ -118,8 +115,7 @@ class fuksi {
     // palauttaa listana niiden tapahtumien id:t, joihin fuksi on osallistunut
 
     public static function etsiFuksinTapahtumat($fuksiID) {
-
-
+        
         $sql = "SELECT tapahtumatunnus FROM osallistuminen WHERE fuksitunnus = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($fuksiID));

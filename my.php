@@ -1,16 +1,7 @@
 <?php
 
 require_once 'libs/common.php';
-require_once 'libs/models/fuksi.php';
-require_once 'libs/models/user.php';
-require_once 'libs/models/tutor.php';
-require_once 'libs/models/event.php';
-require_once 'libs/tietokantayhteys.php';
 
-
-
-
-// yäähhh! korjaan joskus
 
 
 if (isset($_SESSION['fuksi'])) {
@@ -18,9 +9,11 @@ if (isset($_SESSION['fuksi'])) {
     $tapahtumaIDLista = fuksi::etsiFuksinTapahtumat($_SESSION['fuksi']);
     $tapahtumaLista = array();
     
+    // etsitään tapahtumat joihin fuksi on osallistunut
+    
     foreach ($tapahtumaIDLista as $tapahtumaID) {
-        $tapahtumaPalautus = event::etsiTapahtuma($tapahtumaID);
-        $tapahtumaLista[] = $tapahtumaPalautus[0];
+        $tapahtumaLista[] = event::etsiTapahtuma($tapahtumaID);
+        
     }
 
     onkoKirjautunut('my', array(
@@ -31,8 +24,7 @@ if (isset($_SESSION['fuksi'])) {
     ));
     
 } else {
-    $tutorlista = tutor::etsiTutor($_SESSION['tutor']);
-    $hlo = $tutorlista[0];
+    $hlo = tutor::etsiTutor($_SESSION['tutor']);
 
     onkoKirjautunut('my', array(
         'kayttajanimi' => $_SESSION['kirjautunut'],

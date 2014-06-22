@@ -2,6 +2,8 @@
 
 <br>
 
+<!--omat tiedot-->
+
 <div class="row">
     <div class="col-md-6">
         <div class="form-horizontal">
@@ -33,6 +35,8 @@
                     </div>
                 </div>
 
+                <!--näytetään fuksille tämän pistesaldo-->
+                
                 <?php if (isset($_SESSION['fuksi'])): ?>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Pisteet yhteensä</label>
@@ -45,6 +49,9 @@
             </form>
         </div>
     </div>
+    
+    <!--näytetään fuksille tapahtumat, joihin hän on osallistunut-->
+    
     <div class="col-md-6">
         <br>
 

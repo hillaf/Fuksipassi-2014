@@ -1,6 +1,6 @@
 <h1>Lisää tapahtuma</h1>
 <br>
-<div class="lisays">
+<div class="form-group">
 
     <form role="form" action="tapahtumalisays.php" method="POST">
 

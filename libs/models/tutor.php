@@ -6,12 +6,14 @@ class tutor {
     private $nimi;
     private $irc;
     private $email;
+    private $virheet;
 
     public function __construct($id, $nimi, $irc, $email) {
         $this->id = $id;
         $this->nimi = $nimi;
         $this->irc = $irc;
         $this->email = $email;
+        $this->virheet = array();
     }
 
     public function getId() {
@@ -47,12 +49,9 @@ class tutor {
     }
 
     public static function onkoTutor($id) {
-        $param = array();
-        $param[] = (int) $id;
         $sql = "SELECT tutortunnus, nimi, ircnick, email FROM tutor WHERE tutortunnus = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
-        $kysely->execute($param);
-
+        $kysely->execute(array($id));
 
         $tulos = $kysely->fetchObject();
 
@@ -72,18 +71,11 @@ class tutor {
         $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute($param);
 
-        $tulokset = array();
+        $tulos = $kysely->fetchObject();
 
-        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
-            $fuksi = new fuksi($tulos->nimi, $tulos->ircnick, $tulos->email);
-            $fuksi->setId($tulos->tutortunnus);
-
-            $tulokset[] = $fuksi;
-        }
-
-        return $tulokset;
+        $fuksi = new fuksi($tulos->nimi, $tulos->ircnick, $tulos->email);
+        $fuksi->setId($tulos->tutortunnus);
+        return $fuksi;
     }
-
-
 
 }
