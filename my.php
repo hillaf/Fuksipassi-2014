@@ -2,8 +2,6 @@
 
 require_once 'libs/common.php';
 
-
-
 if (isset($_SESSION['fuksi'])) {
     $hlo = fuksi::etsiFuksi($_SESSION['fuksi']);
     $tapahtumaIDLista = fuksi::etsiFuksinTapahtumat($_SESSION['fuksi']);
