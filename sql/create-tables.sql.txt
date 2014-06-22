@@ -32,5 +32,6 @@ CREATE TABLE osallistuminen (
     tapahtumatunnus 	int references tapahtuma(tapahtumatunnus),
     fuksitunnus 	int references fuksi(fuksitunnus),
     pisteet 		int,
-    tutortunnus 	int references tutor(tutortunnus)
+    tutortunnus 	int references tutor(tutortunnus),
+    kommentti		varchar(500)
 );
