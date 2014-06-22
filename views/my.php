@@ -39,7 +39,7 @@
                 
                 <?php if (isset($_SESSION['fuksi'])): ?>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Pisteet yhteensä</label>
+                        <label class="col-sm-2 control-label">Pisteitä tapahtumista</label>
                         <div class="col-sm-10">
                             <p class="form-control-static"><?php echo htmlspecialchars($data->pisteet); ?></p>
                         </div>
@@ -48,6 +48,17 @@
 
             </form>
         </div>
+        
+        <?php foreach ($data->fuksinMerkinnat as $merkinta): ?>
+                <br>
+                <blockquote>
+                    <p><?php echo htmlspecialchars($merkinta->getKuvaus()) ?></p>
+                    <footer><?php echo htmlspecialchars($merkinta->getTutoriid()) ?></cite></footer>
+                </blockquote>
+
+            <?php endforeach ?>
+        
+        
     </div>
     
     <!--näytetään fuksille tapahtumat, joihin hän on osallistunut-->

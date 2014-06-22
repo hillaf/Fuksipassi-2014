@@ -142,6 +142,20 @@ class fuksi {
 
         return $tulos;
     }
+    
+    public function getTapahtumaPisteet() {
+        $sql = "SELECT SUM(pisteet) FROM osallistuminen WHERE fuksitunnus = ? and tapahtumatunnus is not null";
+        $kysely = getTietokantayhteys()->prepare($sql);
+
+        $ok = $kysely->execute(array($this->getId()));
+        $tulos = $kysely->fetchColumn();
+
+        if ($tulos == null) {
+            $tulos = 0;
+        }
+
+        return $tulos;
+    }
 
     public function onkoKelvollinen() {
 

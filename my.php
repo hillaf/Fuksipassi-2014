@@ -15,12 +15,20 @@ if (isset($_SESSION['fuksi'])) {
         $tapahtumaLista[] = event::etsiTapahtuma($tapahtumaID);
         
     }
+    
+    $fuksinMerkinnat = osallistuminen::etsiFuksinMerkinnat($_SESSION['fuksi']);
+    
+    foreach($fuksinMerkinnat as $merkinta){
+    $tutor = tutor::etsiTutor($merkinta->getTutoriid());
+    $merkinta->setTutoriid($tutor->getNimi());
+}
 
     onkoKirjautunut('my', array(
         'kayttajanimi' => $_SESSION['kirjautunut'],
         'hlotiedot' => $hlo,
-        'pisteet' => $hlo->getPisteet(),
-        'osallistututTapahtumat' => $tapahtumaLista
+        'pisteet' => $hlo->getTapahtumaPisteet(),
+        'osallistututTapahtumat' => $tapahtumaLista,
+        'fuksinMerkinnat' => $fuksinMerkinnat
     ));
     
 } else {

@@ -192,6 +192,25 @@ class osallistuminen {
         return $tulokset;
     }
     
+    public static function etsiFuksinMerkinnat($fuksiid) {
+
+        $sql = "SELECT * FROM osallistuminen WHERE fuksitunnus = ? and kommentti is not null";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($fuksiid));
+
+        $tulokset = array();
+
+        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
+            $osallistuminen = new osallistuminen($fuksiid, $tulos->pisteet);
+            $osallistuminen->setKuvaus($tulos->kommentti);
+            $osallistuminen->setTutoriid($tulos->tutortunnus);
+            $osallistuminen->setId($tulos->otunnus);
+            $tulokset[] = $osallistuminen;
+        }
+
+        return $tulokset;
+    }
+    
     public function onkoKelvollinen() {
 
 

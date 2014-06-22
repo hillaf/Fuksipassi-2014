@@ -9,6 +9,8 @@
             <th>Nimi</th>
             <th>Ircnick</th>
             <th>Email</th>
+            <th>Pisteet tapahtumista</th>
+            <th>Kokonaispisteet</th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +22,8 @@
                 <td><?php echo htmlspecialchars($fuksi->getNimi()); ?></td>
                 <td><?php echo htmlspecialchars($fuksi->getIrc()); ?></td>
                 <td><?php echo htmlspecialchars($fuksi->getEmail()); ?></td>
+                <td><?php echo htmlspecialchars($fuksi->getTapahtumaPisteet()); ?></td>
+                <td><?php echo htmlspecialchars($fuksi->getPisteet()); ?></td>
             </tr>
 
         <?php endforeach; ?>
