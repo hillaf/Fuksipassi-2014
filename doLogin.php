@@ -3,17 +3,22 @@
 require_once 'libs/common.php';
 
 $virheet = array();
+$kayttaja = $_POST["kayttajatunnus"];
+$salasana = $_POST["salasana"];
 
-if (empty($_POST["username"]) || empty($_POST["password"])) {
+if (empty($_POST["kayttajatunnus"]) || empty($_POST["salasana"])) {
 
 
     $virheet[] = "Kirjautuminen epäonnistui! Et antanut tunnusta ja/tai salasanaa.";
     /* Käytetään omassa kirjastotiedostossa määriteltyä näkymännäyttöfunktioita */
-    naytaNakyma('login', array('virheet' => $virheet));
+    naytaNakyma('login', array(
+        'kayttaja' => $kayttaja,
+        'salasana' => $salasana,
+        'virheet' => $virheet
+    ));
 }
 
-$kayttaja = $_POST["username"];
-$salasana = $_POST["password"];
+
 
 /* Tarkistetaan onko parametrina saatu oikeat tunnukset */
 $kirjautuja = user::etsiKayttajaTunnuksilla($kayttaja, $salasana);
@@ -31,14 +36,16 @@ if ($kirjautuja != null) {
         $_SESSION['fuksi'] = $kirjautuja->getFuksitunnus();
     }
 
+    $_SESSION['ilmoitus'] = "Kirjautuminen onnistui!";
     header('Location: index.php');
 } else {
-    
+
     $virheet[] = "Kirjautuminen epäonnistui! Antamasi tunnus tai salasana on väärä.";
     /* Väärän tunnuksen syöttänyt saa eteensä kirjautumislomakkeen. */
     naytaNakyma("login", array(
         /* Välitetään näkymälle tieto siitä, kuka yritti kirjautumista */
         'kayttaja' => $kayttaja,
+        'salasana' => $salasana,
         'virheet' => $virheet
     ));
 }

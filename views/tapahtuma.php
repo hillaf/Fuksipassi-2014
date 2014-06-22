@@ -152,7 +152,7 @@
 
             <?php if ($data->onkoOsallistunut == false): ?>
                 <div class="form-group">
-                    <form class="form-group" role="form" method="POST" action="luoOsallistuminen.php">
+                    <form class="form-group" role="form" method="POST" action="luoAlustavaOsallistuminen.php">
                         <input type="hidden" name="id" value="<?php echo $data->naytettavatapahtuma->getId(); ?>">
                         <button type="submit" class="btn btn-success">Osallistuin</button>
                     </form>
