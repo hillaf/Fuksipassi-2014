@@ -53,8 +53,9 @@ class user {
         $this->salasana = $salasana;
     }
 
-    public function setSalasana2($salasana2) {
+    public function setSalasana2($salasana2) {;
         $this->salasana2 = $salasana2;
+        
     }
 
     public function setFuksitunnus($ftunnus) {
@@ -66,12 +67,16 @@ class user {
     }
 
     public static function etsiKayttajaTunnuksilla($kayttaja, $salasana) {
-        $sql = "SELECT * from users where tunnus = ? AND password = ? LIMIT 1";
+        $sql = "SELECT * from users where tunnus = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
-        $kysely->execute(array($kayttaja, $salasana));
-
+        
+        
+        $kysely->execute(array($kayttaja));
         $tulos = $kysely->fetchObject();
-        if ($tulos == null) {
+        
+        $password_verify = (crypt($salasana, $tulos->password) == $tulos->password);
+        
+        if ($tulos == null || $password_verify == false) {
             return null;
         } else {
             $kayttaja = new user($tulos->tunnus, $tulos->password, $tulos->password);
@@ -86,7 +91,8 @@ class user {
         $sql = "INSERT INTO users(id, tunnus, password, fuksitunnus) VALUES(nextval('user_id_seq'),?,?,?) RETURNING id";
         $kysely = getTietokantayhteys()->prepare($sql);
 
-        $ok = $kysely->execute(array($this->getTunnus(), $this->getSalasana(), $foreignid));
+        $password = crypt($this->getSalasana());
+        $ok = $kysely->execute(array($this->getTunnus(), $password, $foreignid));
         if ($ok) {
             //Haetaan RETURNING-määreen palauttama id.
             //HUOM! Tämä toimii ainoastaan PostgreSQL-kannalla!
