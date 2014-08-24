@@ -184,6 +184,26 @@ class osallistuminen {
         return $tulokset;
     }
 
+    public static function etsiFuksinOsallistututTapahtumatOsallistumisina($fuksiid) {
+
+        $sql = "SELECT * FROM osallistuminen WHERE fuksitunnus = ? and kommentti is null";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($fuksiid));
+
+        $tulokset = array();
+
+        foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
+            
+            $osallistuminen = new osallistuminen($tulos->fuksitunnus, $tulos->pisteet);
+            $osallistuminen->setTutoriid($tulos->tutortunnus);
+            $osallistuminen->setTapahtumaid($tulos->tapahtumatunnus);
+            
+            $tulokset[] = $osallistuminen;
+        }
+
+        return $tulokset;
+    }
+    
     public static function etsiFuksinOsallistututTapahtumat($fuksiid) {
 
         $sql = "SELECT tapahtumatunnus FROM osallistuminen WHERE fuksitunnus = ? and kommentti is null";
@@ -197,6 +217,17 @@ class osallistuminen {
         }
 
         return $tulokset;
+    }
+    
+    public static function etsivahvistanutTutor($tapahtuma, $fuksiid) {
+
+        $sql = "SELECT tutortunnus FROM osallistuminen WHERE fuksitunnus = ? and tapahtumatunnus = ? and kommentti is null";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($fuksiid, $tapahtumatunnus));
+
+        $tulos = $kysely->fetchObject();
+
+        return $tulos->tutortunnus;
     }
 
     public static function etsiFuksinMerkinnat($fuksiid) {

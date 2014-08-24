@@ -12,8 +12,16 @@ if (isset($_SESSION['fuksi'])) {
     foreach ($tapahtumaIDLista as $tapahtumaID) {
         $tapahtumaLista[] = event::etsiTapahtuma($tapahtumaID);
     }
+ 
 
     $fuksinMerkinnat = osallistuminen::etsiFuksinMerkinnat($_SESSION['fuksi']);
+    $fuksinTapahtumaOsallistumiset = osallistuminen::etsiFuksinOsallistututTapahtumatOsallistumisina($_SESSION['fuksi']);
+    
+    
+    foreach ($fuksinTapahtumaOsallistumiset as $o){
+        $tutorinNimi = tutor::etsiTutor($o->getTutoriid())->getNimi();
+        $o->setTutoriid($tutorinNimi);
+    }
 
     foreach ($fuksinMerkinnat as $merkinta) {
         $tutor = tutor::etsiTutor($merkinta->getTutoriid());
@@ -25,7 +33,8 @@ if (isset($_SESSION['fuksi'])) {
         'hlotiedot' => $hlo,
         'pisteet' => $hlo->getTapahtumaPisteet(),
         'osallistututTapahtumat' => $tapahtumaLista,
-        'fuksinMerkinnat' => $fuksinMerkinnat
+        'fuksinMerkinnat' => $fuksinMerkinnat,
+        'fuksinTapahtumaOsallistumiset' => $fuksinTapahtumaOsallistumiset,
     ));
 } else {
     $hlo = tutor::etsiTutor($_SESSION['tutor']);

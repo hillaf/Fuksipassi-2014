@@ -53,9 +53,9 @@ class user {
         $this->salasana = $salasana;
     }
 
-    public function setSalasana2($salasana2) {;
+    public function setSalasana2($salasana2) {
+;
         $this->salasana2 = $salasana2;
-        
     }
 
     public function setFuksitunnus($ftunnus) {
@@ -65,17 +65,34 @@ class user {
     public function setTutortunnus($ttunnus) {
         $this->tutortunnus = $ttunnus;
     }
+    
+    public static function etsiKayttaja($tunnus){
+        $sql = "SELECT * from users where tunnus = ? LIMIT 1";
+        $kysely = getTietokantayhteys()->prepare($sql);
+
+
+        $kysely->execute(array($tunnus));
+        $tulos = $kysely->fetchObject();
+
+        if ($tulos == null) {
+            return null;
+        } else {
+            return $tulos->tunnus;
+        }
+        
+        
+    }
 
     public static function etsiKayttajaTunnuksilla($kayttaja, $salasana) {
         $sql = "SELECT * from users where tunnus = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
-        
-        
+
+
         $kysely->execute(array($kayttaja));
         $tulos = $kysely->fetchObject();
-        
+
         $password_verify = (crypt($salasana, $tulos->password) == $tulos->password);
-        
+
         if ($tulos == null || $password_verify == false) {
             return null;
         } else {
@@ -91,7 +108,7 @@ class user {
         $sql = "INSERT INTO users(id, tunnus, password, fuksitunnus) VALUES(nextval('user_id_seq'),?,?,?) RETURNING id";
         $kysely = getTietokantayhteys()->prepare($sql);
 
-        $password = crypt($this->getSalasana());
+        $password = $this->better_crypt($this->getSalasana());
         $ok = $kysely->execute(array($this->getTunnus(), $password, $foreignid));
         if ($ok) {
             //Haetaan RETURNING-määreen palauttama id.
@@ -116,6 +133,12 @@ class user {
         } else {
             unset($this->virheet['SalasanatMismatch']);
         }
+        
+        if ($this->etsiKayttaja($this->tunnus) != null){
+            $this->virheet['kaytossa'] = "Käyttäjätunnus on jo käytössä.";
+        } else {
+            unset($this->virheet['kaytossa']);
+        }
 
         return empty($this->virheet);
     }
@@ -128,6 +151,17 @@ class user {
         } else {
             unset($this->virheet[$tyyppi]);
         }
+    }
+
+    function better_crypt($input, $rounds = 7) {
+        $salt = "";
+        $salt_chars = array_merge(range('A', 'Z'), range('a', 'z'), range(0, 9));
+
+        for ($i = 0; $i < 22; $i++) {
+            $salt .= $salt_chars[array_rand($salt_chars)];
+        } 
+        
+        return crypt($input, sprintf('$2a$%02d$', $rounds) . $salt);
     }
 
 }

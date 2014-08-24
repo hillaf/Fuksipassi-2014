@@ -81,16 +81,27 @@
                             <th>Tapahtuma</th>
                             <th>Päivämäärä</th>
                             <th>Pisteet</th>
+                            <th>Vahvistanut tutor</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         <?php foreach ($data->osallistututTapahtumat as $event): ?>
 
+
                             <tr onclick="window.location.href = 'tapahtuma.php?id=<?php echo $event->getId(); ?>';">
                                 <td><?php echo htmlspecialchars($event->getNimi()); ?></td>
                                 <td><?php echo htmlspecialchars($event->getPvm()); ?></td>
                                 <td><?php echo htmlspecialchars($event->getPisteet()); ?></td>
+                                <td><?php
+                                    $tutor = "";
+                                    foreach ($data->fuksinTapahtumaOsallistumiset as $o) {
+                                        if ($o->getTapahtumaid() == $event->getId()) {
+                                            $tutor = $o->getTutoriid();
+                                            echo htmlspecialchars($tutor);
+                                        }
+                                    }
+                                    ?></td>
                             </tr>
 
                         <?php endforeach; ?>

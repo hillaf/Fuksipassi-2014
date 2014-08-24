@@ -5,7 +5,9 @@
         <p>Olet kirjautunut sisään.</p>
         <p>
             Fuksipassi-sovelluksessa fuksit voivat merkitä osallistuneensa tapahtumiin ja kerätä näin pisteitä.
-            Tutorit voivat vahvistaa osallistumisia ja merkitä fuksille lisäpisteitä fuksitoiminnassa ansioituneille.
+            Tutorit voivat vahvistaa osallistumisia ja tehdä lisämerkintöjä fuksitoiminnassa ansioituneille.
+            
+            
             <br>
         </p>
         <p>
@@ -14,13 +16,16 @@
                 <br>
                 Fuksit eivät näe omia kokonaispisteitään tai tekemistänne merkinnöistä ansaitsemiaan pisteitä.
                 He näkevät vain tapahtumista kertyneet pisteet. Voitte lisätä ja muokata tapahtumia.
+                MERKINTÖJEN SISÄLTÖ NÄKYY FUKSILLE ITSELLEEN (vaikka pisteet eivät), aivan kuten fyysisissäkin fuksipasseissa!
+                
 
-                Jos jotain menee rikki tai pitää parannella tai haluatte antaa palautetta: hihihi@cs.helsinki.fi
             <?php endif ?>
             <?php if (isset($_SESSION['fuksi'])): ?>
 
             <?php endif ?>
         </p>
+        <br>
+        <p>Jos jotain menee rikki tai pitää parannella tai haluatte antaa palautetta: hihihi@cs.helsinki.fi</p>
 
         <br>
 
