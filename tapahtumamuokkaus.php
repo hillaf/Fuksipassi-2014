@@ -2,23 +2,30 @@
 
 require 'libs/common.php';
 
-$id = (int) $_POST['tapahtumatunnus'];
-$tapahtuma = new event($_POST['nimi'], $_POST['paikka'], $_POST['pvm'], $_POST['aika'], $_POST['linkki'], $_POST['pisteet'], $_POST['kuvaus']);
-$tapahtuma->setId($id);
+if (isset($_SESSION['tutor'])) {
 
-if ($tapahtuma->onkoKelvollinen()) {
-    $tapahtuma->paivitaKantaan();
+    $id = (int) $_POST['tapahtumatunnus'];
+    $tapahtuma = new event($_POST['nimi'], $_POST['paikka'], $_POST['pvm'], $_POST['aika'], $_POST['linkki'], $_POST['pisteet'], $_POST['kuvaus']);
+    $tapahtuma->setId($id);
 
-    //Asetetaan istuntoon ilmoitus siitä, että tapahtuma on päivitetty.
-    $_SESSION['ilmoitus'] = "Tapahtuman tiedot päivitetty onnistuneesti.";
+    if ($tapahtuma->onkoKelvollinen()) {
+        $tapahtuma->paivitaKantaan();
 
-    header("Location: tapahtuma.php?id=" . $id);
+        //Asetetaan istuntoon ilmoitus siitä, että tapahtuma on päivitetty.
+        $_SESSION['ilmoitus'] = "Tapahtuman tiedot päivitetty onnistuneesti.";
+
+        header("Location: tapahtuma.php?id=" . $id);
+    } else {
+
+        unset($_SESSION['ilmoitus']);
+        $virheet = $tapahtuma->getVirheet();
+
+        onkoKirjautunut('tapahtumamuokkausform', array(
+            'virheet' => $virheet,
+            'muokattavatapahtuma' => $tapahtuma));
+    }
 } else {
-
-    unset($_SESSION['ilmoitus']);
-    $virheet = $tapahtuma->getVirheet();
-
-    onkoKirjautunut('tapahtumamuokkausform', array(
-        'virheet' => $virheet,
-        'muokattavatapahtuma' => $tapahtuma));
+    onkoKirjautunut('index', array(
+        'virheet' => "Hups! Tapahtui virhe!"
+    ));
 }

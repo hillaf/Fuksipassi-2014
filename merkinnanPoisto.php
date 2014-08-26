@@ -2,11 +2,15 @@
 
 require 'libs/common.php';
 
-$otunnus = $_POST['id'];
-osallistuminen::poistaOsallistuminenTunnuksella($otunnus);
+if (isset($_SESSION['tutor'])) {
+    $otunnus = $_POST['id'];
+    osallistuminen::poistaOsallistuminenTunnuksella($otunnus);
 
-header("Location: fuksi.php?id=" . $_POST['fuksi']);
-$_SESSION['ilmoitus'] = "Merkintä poistettu onnistuneesti.";
-
-
+    header("Location: fuksi.php?id=" . $_POST['fuksi']);
+    $_SESSION['ilmoitus'] = "Merkintä poistettu onnistuneesti.";
+} else {
+    onkoKirjautunut('index', array(
+        'virheet' => "Hups! Tapahtui virhe!"
+    ));
+}
 

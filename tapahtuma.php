@@ -13,7 +13,7 @@ if (isset($_SESSION['fuksi'])) {
         'naytettavatapahtuma' => $naytettavatapahtuma,
         'onkoOsallistunut' => $onkoOsallistunut
     ));
-} else {
+} else if (isset($_SESSION['tutor'])) {
 
     // näytetään tutorille kaikki osallistuneet fuksit
 
@@ -35,5 +35,10 @@ if (isset($_SESSION['fuksi'])) {
         'vahvistetutfuksit' => $vahvistetutfuksit,
         'vahvistamattomatfuksit' => $vahvistamattomatfuksit
     ));
+} else {
+    onkoKirjautunut('index', array(
+        'virheet' => "Hups! Tapahtui virhe!"
+    ));
 }
+
 

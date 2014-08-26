@@ -2,13 +2,17 @@
 
 require_once 'libs/common.php';
 
-$tapahtumaIDLista = osallistuminen::etsiVahvistamattomiaOsallistumisiaSisaltavatTapahtumat();
-$tapahtumat = array();
+if (isset($_SESSION['tutor'])) {
+    $tapahtumaIDLista = osallistuminen::etsiVahvistamattomiaOsallistumisiaSisaltavatTapahtumat();
+    $tapahtumat = array();
 
-foreach ($tapahtumaIDLista as $id) {
-    $tapahtumat[] = event::etsiTapahtuma($id);
+    foreach ($tapahtumaIDLista as $id) {
+        $tapahtumat[] = event::etsiTapahtuma($id);
+    }
+
+    onkoKirjautunut('index', array(
+        'vahvistamattomatTapahtumat' => $tapahtumat
+    ));
+} else {
+    onkoKirjautunut('index', array());
 }
-
-onkoKirjautunut('index', array(
-    'vahvistamattomatTapahtumat' => $tapahtumat
-));

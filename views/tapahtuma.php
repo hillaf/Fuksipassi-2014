@@ -37,7 +37,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Linkki</label>
                     <div class="col-sm-10">
-                        <p class="form-control-static"><?php echo htmlspecialchars($data->naytettavatapahtuma->getLinkki()); ?></p>
+                        <p class="form-control-static"><a href="<?php echo htmlspecialchars($data->naytettavatapahtuma->getLinkki()); ?>"><?php echo htmlspecialchars($data->naytettavatapahtuma->getLinkki()); ?></a></p>
                     </div>
                 </div>
                 <div class="form-group">
